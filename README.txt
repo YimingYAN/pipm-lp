@@ -1,4 +1,4 @@
-PIPM: Perturbed Interior Point Methods (for LP\QP)
+PIPM: Perturbed Interior Point Methods for LP
 ---------------------------------------------------------------------------
 Description:
 An infeasible primal-dual path-following inteiror point method with 
