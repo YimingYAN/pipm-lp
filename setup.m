@@ -1,0 +1,40 @@
+% This script is used to initilaize and install the pipm solver
+% Currently our solver has only been tested on 64bit Linux system.
+%
+% To run the code for other version of Matlab or other system, please down 
+% the correspoding mex files for lpsolve from 
+%      http://sourceforge.net/projects/lpsolve/files/lpsolve/5.5.2.0/
+% and then uncompress the contents to thirdParty/lp_solve folder
+%
+% September 16, 2013
+% Yiming Yan
+% University of Edinburgh
+
+osCheck = 0;
+%% Check system
+fprintf('Checking OS... ');
+if isunix && strcmpi(mexext,'mexa64')
+    osCheck = 1;
+    fprintf('Done.\n')
+else
+    printf('Works only for 64bit Matlab under Linux.\n');
+    return;
+end
+
+%% Addpaths
+fprintf('Add necessary folders to path... ');
+if osCheck
+    currentLocation = pwd;
+    addpath( currentLocation );
+    addpath( genpath( [currentLocation '/src'  ] ) );
+    addpath( genpath( [currentLocation '/Examples'  ] ) );
+    addpath( genpath( [currentLocation '/thirdParty'] ) );
+    addpath( genpath( [currentLocation '/Tests'] ) );
+end
+fprintf('Done. \n')
+
+%% Test installation
+% examples
+
+
+
