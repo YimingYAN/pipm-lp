@@ -62,6 +62,8 @@ missedPrediction = falsePrediction;
 correctionR = falsePrediction;
 avgResidual = falsePrediction;
 
+skipped = 0;
+
 for k=stopAtRangeL:1:stopAtRangeU
     % Reset the random number generator
     rng('default');
@@ -89,14 +91,7 @@ for k=stopAtRangeL:1:stopAtRangeU
                 return;
         end
         
-        % Solve the problem using pipm
-        parameters_per.maxIter = k;
-        per = pipm(A,b,c,parameters_per); per.solve; 
-        
-        parameters_unper.maxIter = k;
-        unper = pipm(A,b,c,parameters_unper); unper.solve; 
-        
-        % solve the problem using linprog (simplex method)
+         % solve the problem using linprog (simplex method)
         [m,n] = size(A);
         lb = zeros(n,1);
         ub = inf*ones(n,1);
@@ -106,8 +101,20 @@ for k=stopAtRangeL:1:stopAtRangeU
         % options = optimset('Algorithm','active-set','Display','off');
         A = full(A);
         
-        xsol=linprog(c,[],[],A,b,lb,ub,[],options);
+        [xsol,~,exitflag] = linprog(c,[],[],A,b,lb,ub,[],options);
+        
+        if exitflag ~= 1
+            skipped = skipped + 1;
+            continue;
+        end
         actualActv = find(xsol<1e-05);
+        
+        % Solve the problem using pipm
+        parameters_per.maxIter = k;
+        per = pipm(A,b,c,parameters_per); per.solve; 
+        
+        parameters_unper.maxIter = k;
+        unper = pipm(A,b,c,parameters_unper); unper.solve; 
         
         % get the correction ratios
         [tpfpr1, tpmpr1, tpcr1] = ...
@@ -140,6 +147,8 @@ for k=stopAtRangeL:1:stopAtRangeU
         
     counter = counter+1;
 end
+
+fprintf('\nTotal number of probs skipped: %d\n', skipped);
 
 
 
