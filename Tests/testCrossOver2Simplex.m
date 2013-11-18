@@ -22,7 +22,7 @@ clc;
 % Determine which set of problems to test on.
 % Choose from the following three values:
 % random, netlib, random_degen
-Type = 'random';   
+Type = 'random_degen';   
 
 % Determine which active-set prediction strategy to use.
 % In the paper, we mainly show the results of using a constant as threshold
@@ -111,10 +111,12 @@ while i<=numTestProb
             [A,b,c,FEASIBLE]=myPreprocess(A,b,c,lbounds,ubounds,BIG);
             
         case 'random'
-            [A,b,c] = generateRandomProb;
+            [A,b,c] = generateRandomProb('m_min',100,'m_max',500,...
+                'n_min',200,'n_max',1000);
             
         case 'random_degen'
-            [A, b, c] = generateDegenProb;
+            [A, b, c] = generateDegenProb('m_min',100,'m_max',500,...
+                'n_min',200,'n_max',1000);
     end
     
     % Solve the problem using pipm
