@@ -10,7 +10,6 @@
 % Yiming Yan
 % University of Edinburgh
 
-osCheck = 0;
 %% Check system
 fprintf('Checking OS... ');
 if isunix && strcmpi(mexext,'mexa64')
@@ -23,14 +22,23 @@ end
 
 %% Addpaths
 fprintf('Add necessary folders to path... ');
-if osCheck
-    currentLocation = pwd;
-    addpath( currentLocation );
-    addpath( genpath( [currentLocation '/src'  ] ) );
-    addpath( genpath( [currentLocation '/Examples'  ] ) );
-    addpath( genpath( [currentLocation '/thirdParty'] ) );
-    addpath( genpath( [currentLocation '/Tests'] ) );
+
+currentLocation = pwd;
+addpath( currentLocation );
+addpath( genpath( [currentLocation '/src'  ] ) );
+addpath( genpath( [currentLocation '/Examples'  ] ) );
+addpath( genpath( [currentLocation '/thirdParty'] ) );
+addpath( genpath( [currentLocation '/Tests'] ) );
+
+reply = input(' - Would like to save the paths? - (Y/N): ');
+if strcmpi(reply,'y')
+    try 
+        savepath;
+    catch % may not work
+        warning('PIPM Setup: Cannot save paths. You may not have admin rights')
+    end
 end
+
 fprintf('Done. \n')
 
 %% Test installation
