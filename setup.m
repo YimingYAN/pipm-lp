@@ -17,7 +17,7 @@ if isunix && strcmpi(mexext,'mexa64')
     osCheck = 1;
     fprintf('Done.\n')
 else
-    printf('Works only for 64bit Matlab under Linux.\n');
+    fprintf('Works only for 64bit Matlab under Linux.\n');
     return;
 end
 
