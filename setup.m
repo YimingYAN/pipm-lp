@@ -1,12 +1,7 @@
 % This script is used to initilaize and install the pipm solver
 % Currently our solver has only been tested on 64bit Linux system.
 %
-% To run the code for other version of Matlab or other system, please down 
-% the correspoding mex files for lpsolve from 
-%      http://sourceforge.net/projects/lpsolve/files/lpsolve/5.5.2.0/
-% and then uncompress the contents to thirdParty/lp_solve folder
-%
-% September 16, 2013
+% 21 November  2013
 % Yiming Yan
 % University of Edinburgh
 
