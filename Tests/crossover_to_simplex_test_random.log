@@ -102,6 +102,17 @@
 random_100 &   16 &   87 &  5.52e-04 &  3.57e-04 &         6 &        18 &        35 \\ 
 ---------------------------------------------------------------------
   Average: &      &      &  7.33e-04 &  6.80e-04 &        10 &       287 &       436
+
+============================ Basis_Diff ============================
+Rel. difference between bases generated from perturbed and unperturbed algs
+
+ Average  Min  Max
+    0.66 0.42 0.93
+
+Problems with less than 10% difference:
+
+Idx.      Probs. Rel_Diff
+Plotting histogram for basis_diff...
 # of Probs removed: 0
 Problems removed: 
 Plotting relative performance figure...

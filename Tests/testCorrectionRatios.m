@@ -35,11 +35,12 @@ clc;
 % Choose from the following two values:
 % random, random_degen
 fprintf('1. Pls choose the test set [1-2]: \n');
-fprintf('\t 1. Random test (primal nondegenerate)\n');
-fprintf('\t 2. Random test (primal-dual degenerate)\n');
+fprintf('\t [1]. Random test (primal nondegenerate)\n');
+fprintf('\t [2]. Random test (primal-dual degenerate)\n');
 usrinput_type = input('Your choice here [1-2]: ');
+
 if usrinput_type == 1
-    Type = 'Random';
+    Type = 'random';
 elseif usrinput_type == 2
     Type = 'random_degen';
 else
@@ -56,21 +57,21 @@ actvPredStrtgy = 'conservCutoff'; % Default value conservCutoff
 
 % -------------------------------------------------------------------------
 
-numTestProb = 50; % set to 10 for demo. 50 for real test.
+numTestProb  = 100; % set to 10 for demo. 100 for real test.
 stopAtRangeL = 8;
 stopAtRangeU = 14;
 
 % With perturbations
-parameters_per.verbose = 0;
-parameters_per.iPer = 1e-02;
-parameters_per.actvPredStrtgy = actvPredStrtgy;
-parameters_per.doCrossOver = 0;
+parameters_per.verbose          = 0;
+parameters_per.iPer             = 1e-02;
+parameters_per.actvPredStrtgy   = actvPredStrtgy;
+parameters_per.doCrossOver      = 0;
 
 % Without perturbations
-parameters_unper.verbose = 0;
-parameters_unper.iPer = 0;
+parameters_unper.verbose        = 0;
+parameters_unper.iPer           = 0;
 parameters_unper.actvPredStrtgy = actvPredStrtgy;
-parameters_unper.doCrossOver = 0;
+parameters_unper.doCrossOver    = 0;
 
 %% Run the test
 fprintf('2. Start the %s test...\n', Type);
@@ -84,10 +85,10 @@ fprintf('\n%4s | %11s | %7s %7s %7s %9s | %7s %7s %7s %9s\n',...
 
 counter = 1;      % Counter for outter loop
 
-falsePrediction = zeros(stopAtRangeU - stopAtRangeL, 2);
+falsePrediction  = zeros(stopAtRangeU - stopAtRangeL, 2);
 missedPrediction = falsePrediction;
-correctionR = falsePrediction;
-avgResidual = falsePrediction;
+correctionR      = falsePrediction;
+avgResidual      = falsePrediction;
 
 skipped = 0;
 
@@ -98,9 +99,12 @@ for k=stopAtRangeL:1:stopAtRangeU
     
     % Initialize data
     i=1;
+    
     fpr1 = 0; mpr1 = 0; cr1 = 0;
     fpr2 = 0; mpr2 = 0; cr2 = 0;
+    
     avgRes1 = 0; avgRes2 = 0;
+    
     Avgm = 0; Avgn = 0;
     
     while i<=numTestProb
@@ -108,21 +112,21 @@ for k=stopAtRangeL:1:stopAtRangeU
         switch lower(Type)
             case 'random'
                 [A, b, c] = ...
-                    generateRandomProb('m_min',100,'m_max',200,...
-                    'n_min',200,'n_max',500);
+                    generateRandomProb('m_min',10,'m_max',200,...
+                    'n_min',20,'n_max',500);
             case 'random_degen'
                 [A, b, c] =...
-                    generateDegenProb('m_min',100,'m_max',200,...
-                    'n_min',200,'n_max',500);
+                    generateDegenProb('m_min',10,'m_max',200,...
+                    'n_min',20,'n_max',500);
             otherwise
                 return;
         end
         
         %% Solve the problem using linprog (simplex method)
         [m,n] = size(A);
-        lb = zeros(n,1);
-        ub = inf*ones(n,1);
-        A = full(A);
+        lb    = zeros(n,1);
+        ub    = inf*ones(n,1);
+        A     = full(A);
         
         % options = optimset('LargeScale', 'off', 'Algorithm','simplex','Display','off');
         % options = optimset('Algorithm','active-set','Display','off');
@@ -185,6 +189,7 @@ fprintf('3. Output the result...\n');
 range = stopAtRangeL : stopAtRangeU;
 Legends = {'Without perturbations' 'With perturbations'};
 fileName = ['correction_ratio_test_' Type];
+
 plotCorrectionRatios(falsePrediction, missedPrediction,...
     correctionR, avgResidual, range, Legends,fileName);
 

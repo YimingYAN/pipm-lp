@@ -31,14 +31,37 @@
       SEBA & 1029 & 1550 &  5.92e-04 &  3.09e-04 &        23 &        43 &        70 \\ 
   SHARE1B* &  112 &  248 &  2.87e-03 &  8.18e-02 &        27 &       176 &       204 \\ 
    SHARE2B &   96 &  162 &  3.19e-04 &  3.90e-04 &        14 &        57 &       126 \\ 
-   SHIP04L &  356 & 2162 &  6.55e-04 &  2.15e-03 &        27 &        13 &       215 \\ 
+   SHIP04L &  356 & 2162 &  6.55e-04 &  2.92e-04 &        27 &        13 &       215 \\ 
    SHIP08L &  688 & 4339 &  6.55e-04 &  5.41e-04 &        29 &       441 &      1056 \\ 
-   SHIP08S &  416 & 2171 &  6.34e-04 &  2.48e-03 &        26 &        70 &       NaN \\ 
-   SHIP12S &  466 & 2293 &  2.12e-04 &  7.04e-05 &        33 &        18 &       617 \\ 
+   SHIP08S &  416 & 2171 &  6.34e-04 &  3.56e-04 &        26 &        70 &       NaN \\ 
+   SHIP12S &  466 & 2293 &  2.12e-04 &  2.74e-05 &        33 &        18 &       541 \\ 
      STAIR &  362 &  544 &  6.56e-04 &  1.11e-02 &        16 &       292 &       294 \\ 
 \textbf{STOCFOR2} & 2157 & 3045 &  5.63e-04 &  4.74e-05 &        39 &      1213 &       796 \\ 
 ---------------------------------------------------------------------
-  Average: &      &      &  5.81e-03 &  8.00e-03 &        22 &       358 &       614
+  Average: &      &      &  5.81e-03 &  7.89e-03 &        22 &       358 &       612
+
+============================ Basis_Diff ============================
+Rel. difference between bases generated from perturbed and unperturbed algs
+
+ Average  Min  Max
+    0.38 0.00 0.95
+
+Problems with less than 10% difference:
+
+Idx.      Probs. Rel_Diff
+   3       AFIRO    0.071
+   4        AGG3    0.075
+  13       GROW7    0.056
+  14      ISRAEL    0.011
+  17       SC50B    0.000
+  20      SCFXM2    0.022
+  21      SCFXM3    0.014
+  29        SEBA    0.040
+  37    STOCFOR2    0.078
+Plotting histogram for basis_diff...
+
+============================ Rel Performance ============================
+
 # of Probs removed: 0
 Problems removed: 
 Plotting relative performance figure...

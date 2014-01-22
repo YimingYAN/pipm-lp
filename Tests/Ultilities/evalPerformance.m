@@ -2,12 +2,12 @@ classdef evalPerformance
     % EVALPERFORMANCE
     %
     % This class is a collection of tools evaluating the performance of given
-    % solvers; For all figures, both eps and pdf files will be generated
+    % solvers; For all figures, both eps and pdf files will be generated.
     %
     % Tools included:
     %   * Basic statistics - min, max, percentiles, average
-    %   * Performance profile [1] -
-    %   * Relative performacne [2] -
+    %   * Performance profile  [1]  
+    %   * Relative performacne [2]  
     %
     % -------------------------------------------------------------------------
     % Input:
@@ -29,7 +29,9 @@ classdef evalPerformance
     % Methods:
     %         - performaceProfile
     %         - relativePerformacne  
-    %           
+    %         -
+    %         -
+    %
     % -------------------------------------------------------------------------
     % Reference
     %   [1] E.D. Dolan and J.J. More', Benchmarking optimization software with
@@ -186,7 +188,6 @@ classdef evalPerformance
             fname = [ obj.folderName '/' obj.fileName '_pprofile' ];
             print('-depsc',fname);
             [result,msg] = eps2pdf([fname '.eps']);
-
         end
         
         %% Plot relative performance figure
@@ -216,6 +217,7 @@ classdef evalPerformance
             
             % set cap
             max_ratio = min(level,max(abs(barData)));
+            %max_ratio = max(abs(barData));
             barData(barData > max_ratio) = max_ratio;
             barData(barData < -max_ratio) = -max_ratio;
             

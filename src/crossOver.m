@@ -44,6 +44,7 @@ classdef crossOver < handle
         
         function generateInitialBasis(crossover, prob)
             % generateInitialBasis - Generates initial basis for simplex
+            
             crossover.basis = setdiff(1:prob.n,prob.actv);
             
             % Remove dependent parts from A_iactv
@@ -71,8 +72,8 @@ classdef crossOver < handle
             crossover.basis = -crossover.basis' - prob.m;
         end
         
-        % Set basis function
         function setBasis(crossover, status)
+            % setBasis - Set basis for the simplex solver
             try
                 status_set_basis = mxlpsolve('set_basis',...
                     crossover.lp, crossover.basis,0);
@@ -84,8 +85,8 @@ classdef crossOver < handle
             end
         end
         
-        % Solve the problem using a simplex method
         function solveSplx(crossover, prob, status)
+            % solveSplx - Solve the problem using a simplex method
             if status.isSetBasisOK
                 status_sol = mxlpsolve('solve', crossover.lp);
                 

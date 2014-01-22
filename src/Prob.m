@@ -2,13 +2,13 @@ classdef Prob < handle
     % PROB Data class of an LP/QP problem.
     % Contatins data for the following problem
     % minimise c'x subject to Ax = b and x >= 0.
-
-
+    
+    
     %% Problem data
     properties (SetAccess = private)
         Name;   % Name of the problem
-        A;      
-        b;    
+        A;
+        b;
         c;
         m;
         n;
@@ -40,50 +40,50 @@ classdef Prob < handle
             end
         end
         
-	function setProbName(prob, Name)
-	% setProbName - Sets name of the problem
-		prob.Name = Name;
-	end
+        function setProbName(prob, Name)
+            % setProbName - Sets name of the problem
+            prob.Name = Name;
+        end
         
-	% Set x
+        % Set x
         function update_x(prob, x_new)
-	% update_x - Updates the current best approx. of x
+            % update_x - Updates the current best approx. of x
             prob.x = x_new;
         end
         
         % Set y
         function update_y(prob, y_new)
-	% update_y - Updates the current best approx. of y
+            % update_y - Updates the current best approx. of y
             prob.y = y_new;
         end
         
         % Set s
         function update_s(prob, s_new)
-	% update_s - Updates the current best approx. of s
+            % update_s - Updates the current best approx. of s
             prob.s = s_new;
         end
         
         % Set actv
         function update_actv(prob, actv_new)
-	% update_actv - Updates the current best approx. of active-set
-           prob.actv = actv_new; 
+            % update_actv - Updates the current best approx. of active-set
+            prob.actv = actv_new;
         end
         
         % Set iactv
         function update_iactv(prob, iactv_new)
-	% update_iactv - Updates the current best approx. of inactive-set
-           prob.iactv = iactv_new; 
+            % update_iactv - Updates the current best approx. of inactive-set
+            prob.iactv = iactv_new;
         end
         
         % Set N
         function update_N(prob, N_new)
-	% update_N - Updates the current best approx. of undetermined index set
-           prob.N = N_new; 
+            % update_N - Updates the current best approx. of undetermined index set
+            prob.N = N_new;
         end
-                
+        
         % Get the objective function value
         function fval = getFval(prob)
-	% getFval - Gets the current objective function value
+            % getFval - Gets the current objective function value
             fval = prob.c'*prob.x;
         end
     end

@@ -16,7 +16,7 @@ else
 end
 
 %% Addpaths
-fprintf('Add necessary folders to path... ');
+fprintf('Add necessary folders to path... \n');
 
 currentLocation = pwd;
 addpath( currentLocation );
@@ -25,7 +25,7 @@ addpath( genpath( [currentLocation '/Examples'  ] ) );
 addpath( genpath( [currentLocation '/thirdParty'] ) );
 addpath( genpath( [currentLocation '/Tests'] ) );
 
-reply = input(' - Would like to save the paths? - (Y/N): ');
+reply = input(' - Would like to save the paths? - (Y/N): ','s');
 if strcmpi(reply,'y')
     try 
         savepath;
