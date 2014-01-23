@@ -102,3 +102,39 @@ random_99  366  1.27e+00  1.24e+00  1.81e-02
 random_100   87  9.27e-01  9.07e-01  2.13e-02
 ----------------------------------------------
     MEAN   --  1.64e+00  1.62e+00  1.63e-02
+=============== Compare mu0 ===============
+     ID.    N     MUP_0      MU_0  REL_DIFF
+{Undefined function 'generateRandomProb' for input arguments of type 'char'.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('checkInitialMu', '/Users/yimingyan/Dropbox/MyToys/MatlabCodes/PIPM/pipm-lp/Tests/checkInitialMu.m', 73)" style="font-weight:bold">checkInitialMu</a> (<a href="matlab: opentoline('/Users/yimingyan/Dropbox/MyToys/MatlabCodes/PIPM/pipm-lp/Tests/checkInitialMu.m',73,0)">line 73</a>)
+            [A,b,c] = generateRandomProb('m_min',10,'m_max',200,...
+} 
+cd ..
+fprintf('Add necessary folders to path... \n');
+Add necessary folders to path... 
+
+currentLocation = pwd;
+addpath( currentLocation );
+addpath( genpath( [currentLocation '/src'  ] ) );
+addpath( genpath( [currentLocation '/Examples'  ] ) );
+addpath( genpath( [currentLocation '/thirdParty'] ) );
+addpath( genpath( [currentLocation '/Tests'] ) );
+
+reply = input(' - Would like to save the paths? - (Y/N): ','s');
+ - Would like to save the paths? - (Y/N): n
+if strcmpi(reply,'y')
+    try 
+        savepath;
+    catch % may not work
+        warning('PIPM Setup: Cannot save paths. You may not have admin rights')
+    end
+end
+
+fprintf('Done. \n')
+Done. 
+checkInitialMu
+1. Pls choose the test set [1-2]: 
+	 1. Random test (primal nondegenerate)
+	 2. Random test (primal-dual degenerate)
+	 3. Netlib test  
+Your choice here [1-3]: 1

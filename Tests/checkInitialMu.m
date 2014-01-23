@@ -61,7 +61,7 @@ end
 mup_0 = 0; mu_0 = 0;
 mus = zeros(numTestProb,2);
 i = 1;
-fprintf('%8s %4s %9s %9s %9s\n', 'ID.', 'N', 'MUP_0', 'MU_0', 'REL_DIFF');
+fprintf('%10s %4s %9s %9s %9s\n', 'ID.', 'N', 'MUP_0', 'MU_0', 'REL_DIFF');
 while i<=numTestProb
     switch Type
         case 'netlib'
@@ -89,14 +89,14 @@ while i<=numTestProb
     
     mus(i,:) = [ mup_0 mu_0 ];
     
-    fprintf('%8s %4d %9.2e %9.2e %9.2e\n',...
+    fprintf('%10s %4d %9.2e %9.2e %9.2e\n',...
         prob2test{i}, prob.n, mup_0, mu_0, (mup_0-mu_0)/mu_0);
     
     % Increment counter
     i = i+1;
 end
 fprintf('----------------------------------------------\n')
-fprintf('%8s %4s %9.2e %9.2e %9.2e\n',...
+fprintf('%10s %4s %9.2e %9.2e %9.2e\n',...
     'MEAN', '--', mean(mus(:,1)), mean(mus(:,2)),...
     mean( ( abs(mus(:,1) - mus(:,2)) ) ./ mus(:,2)));
 
