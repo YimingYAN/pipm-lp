@@ -1,4 +1,4 @@
-============================ Crossover Tests ============================
+============================== Crossover Tests ==============================
       Prob &    m &    n &    mu_per &    mu_unp &  iter_ipm &  splx_per &  splx_unp \\ 
     25FV47 &  798 & 1854 &  9.38e-04 &  1.34e-03 &        35 &      4193 &      6951 \\ 
   ADLITTLE &   55 &  137 &  3.79e-04 &  2.23e-04 &        16 &        18 &       119 \\ 
@@ -58,6 +58,7 @@ Idx.      Probs. Rel_Diff
   21      SCFXM3    0.014
   29        SEBA    0.040
   37    STOCFOR2    0.078
+
 Plotting histogram for basis_diff...
 
 ============================ Rel Performance ============================

@@ -112,7 +112,11 @@ Rel. difference between bases generated from perturbed and unperturbed algs
 Problems with less than 10% difference:
 
 Idx.      Probs. Rel_Diff
+
 Plotting histogram for basis_diff...
+
+============================ Rel Performance ============================
+
 # of Probs removed: 0
 Problems removed: 
 Plotting relative performance figure...
