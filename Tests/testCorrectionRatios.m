@@ -1,8 +1,8 @@
-% Function testCorrectionRatios
+% FUNCTION testCorrectionRatios
 %
 % -------------------------------------------------------------------------
 %
-% This script is used to compare the correction ratios for the algorithms
+% This function is used to compare the correction ratios for the algorithms
 % with and without perturbations.
 %
 % -------------------------------------------------------------------------
@@ -20,68 +20,38 @@
 %
 % -------------------------------------------------------------------------
 %
+% Notes:
+%   1. In the paper, we denote the perturbed algorithm as Algorithm 6.1 and
+%   the unperturbed algorithm as Algorithm 6.4.
+%
+% -------------------------------------------------------------------------
+%
 % 22 Jan 2014
 % Yiming Yan
 % University of Edinburgh
 
-%% %%%%% %%%%%%% %%%%%%% --- Main Func --- %%%%%%% %%%%%%% %%%%% %%
+%% ----------------- Main Func -------------------- %%
 function testCorrectionRatios
 clear all;
 close all;
 clc;
 
 %% Setup
-% Determine which set of problems to test on.
-% Choose from the following two values:
-% random, random_degen
-fprintf('1. Pls choose the test set [1-2]: \n');
-fprintf('\t [1]. Random test (primal nondegenerate)\n');
-fprintf('\t [2]. Random test (primal-dual degenerate)\n');
-usrinput_type = input('Your choice here [1-2]: ');
-
-if usrinput_type == 1
-    Type = 'random';
-elseif usrinput_type == 2
-    Type = 'random_degen';
-else
-    error('testCorrectionRatios: please choose a number from the above list');
-end
-
-% Determine which active-set prediction strategy to use.
-% In the paper, we mainly show the results of using a constant as threshold
-% value ('conservCutoff'). In the last part the paper, we also mentioned
-% the use of identification fucntion ('conservIdFunc'). Both strategies have
-% been implemented.
-actvPredStrtgy = 'conservCutoff'; % Default value conservCutoff
-% Alternative: conservIdFunc
+[Type, numTestProb, params_per, params_unper] = setup_correctionRatio;
 
 % -------------------------------------------------------------------------
-
-numTestProb  = 100; % set to 10 for demo. 100 for real test.
 stopAtRangeL = 8;
-stopAtRangeU = 14;
+stopAtRangeU = 12;
 
-% With perturbations
-parameters_per.verbose          = 0;
-parameters_per.iPer             = 1e-02;
-parameters_per.actvPredStrtgy   = actvPredStrtgy;
-parameters_per.doCrossOver      = 0;
-
-% Without perturbations
-parameters_unper.verbose        = 0;
-parameters_unper.iPer           = 0;
-parameters_unper.actvPredStrtgy = actvPredStrtgy;
-parameters_unper.doCrossOver    = 0;
+% Options for plots
+% Legends = {'With perturbations' 'Without perturbations'};
+Legends = {'Algorithm 6.1' 'Algorithm 6.4'};
+fileName = ['correction_ratio_test_' Type];
 
 %% Run the test
-fprintf('2. Start the %s test...\n', Type);
-fprintf('\n');
-
-fprintf('================================= Correction Ratio Tests =================================\n');
-
-fprintf('\n%4s | %11s | %7s %7s %7s %9s | %7s %7s %7s %9s\n',...
-    'Iter', '[m,n]  ', 'FPR_UNP', 'MPR_UNP', 'CR_UNP', 'RES_UNP',...
-    'FPR_PER', 'MPR_PER', 'CR_PER', 'RES_PER');
+fprintf('\n2. Start the %s test...\n', Type);
+fprintf('\n================================= Correction Ratio Tests =================================\n');
+printHeader;
 
 counter = 1;      % Counter for outter loop
 
@@ -122,73 +92,66 @@ for k=stopAtRangeL:1:stopAtRangeU
                 return;
         end
         
-        %% Solve the problem using linprog (simplex method)
-        [m,n] = size(A);
-        lb    = zeros(n,1);
-        ub    = inf*ones(n,1);
-        A     = full(A);
+        [m, n] = size(A);
+        %% Solve the problem using linprog (ipm) and get the actual actv
+        [actualActv, exitflag] = solveLinprog(A,b,c);
         
-        % options = optimset('LargeScale', 'off', 'Algorithm','simplex','Display','off');
-        % options = optimset('Algorithm','active-set','Display','off');
-        options = optimset('Algorithm', 'interior-point','Display','off');
-        
-        [xsol,~,exitflag] = linprog(c,[],[],A,b,lb,ub,[],options);
-        
-        % Skip the test problem if liprog does not converge
+        % Skip the test problem if linprog does not converge
         if exitflag ~= 1
             skipped = skipped + 1;
             continue;
         end
-        actualActv = find(xsol<1e-05);
         
-        %% Solve the problem using pipm
-        parameters_per.maxIter = k;
-        per = pipm(A,b,c,parameters_per); per.solve;
+        %% Solve the problem using pipm-lp (Perturbed alg)
+        params_per.maxIter = k;
+        per = pipm(A,b,c,params_per); per.solve;
         
-        parameters_unper.maxIter = k;
-        unper = pipm(A,b,c,parameters_unper); unper.solve;
+        params_unper.maxIter = k;
+        unper = pipm(A,b,c,params_unper); unper.solve;
         
-        %% Get the correction ratios
+        %% Accumulate the correction ratios
         [tpfpr1, tpmpr1, tpcr1] = ...
-            getCorrectionRatio(unper.getActv, actualActv);
-        [tpfpr2, tpmpr2, tpcr2] = ...
             getCorrectionRatio(per.getActv, actualActv);
+        [tpfpr2, tpmpr2, tpcr2] = ...
+            getCorrectionRatio(unper.getActv, actualActv);
         
         fpr1 = fpr1+tpfpr1; mpr1 = mpr1+tpmpr1; cr1 = cr1+tpcr1;
         fpr2 = fpr2+tpfpr2; mpr2 = mpr2+tpmpr2; cr2 = cr2+tpcr2;
-        avgRes1 = unper.getIPMResidual + avgRes1;
-        avgRes2 = per.getIPMResidual + avgRes2;
+        
+        avgRes1 = per.getIPMResidual + avgRes1;
+        avgRes2 = unper.getIPMResidual   + avgRes2;
+        
         Avgm = Avgm+m; Avgn = Avgn+n;
         
+        %% Increment the counter
         i = i+1;
     end
     
-    falsePrediction(counter,:) = [fpr1 fpr2]./numTestProb;
+    %% Get the averages
+    falsePrediction(counter,:)  = [fpr1 fpr2]./numTestProb;
     missedPrediction(counter,:) = [mpr1 mpr2]./numTestProb;
-    correctionR(counter,:) = [cr1 cr2]./numTestProb;
-    avgResidual(counter,:) = [avgRes1 avgRes2]./numTestProb;
-    Avgm = round(Avgm/numTestProb);
-    Avgn = round(Avgn/numTestProb);
+    correctionR(counter,:)      = [cr1 cr2]./numTestProb;
     
-    fprintf('%4d | [%4d %4d] | %7.2f %7.2f %7.2f %9.2e | %7.2f %7.2f %7.2f %9.2e\n',...
-        k,Avgm,Avgn,...
-        falsePrediction(counter, 1), missedPrediction(counter, 1), ...
-        correctionR(counter, 1),      avgResidual(counter, 1), ...
-        falsePrediction(counter, 2), missedPrediction(counter, 2), ...
-        correctionR(counter, 2),      avgResidual(counter, 2) );
+    avgResidual(counter,:)      = [avgRes1 avgRes2]./numTestProb;
+    
+    Avgm = round(Avgm/numTestProb); Avgn = round(Avgn/numTestProb);
+    
+    printContent(k, counter, Avgm, Avgn, falsePrediction,...
+        missedPrediction, correctionR, avgResidual);
     
     counter = counter+1;
 end
 
-fprintf('\n\tTotal number of probs skipped: %d\n\n', skipped);
+fprintf('\n\tTotal number of probs skipped: %d\n', skipped);
 
+clearvars A b c lb ub m n i k xsol exitflag...
+    Prob per unper cr* fpr* mpr* tp*...
+    avgRes1 avgRes2 actualActv counter;
 save( ['correction_ratio_test_' Type '.mat'] );
 
 %% Output the result
-fprintf('3. Output the result...\n');
+fprintf('\n3. Output the result...\n');
 range = stopAtRangeL : stopAtRangeU;
-Legends = {'Without perturbations' 'With perturbations'};
-fileName = ['correction_ratio_test_' Type];
 
 plotCorrectionRatios(falsePrediction, missedPrediction,...
     correctionR, avgResidual, range, Legends,fileName);
@@ -197,7 +160,66 @@ fprintf('DONE.\n');
 fprintf('Pls check the file %s for the plot.\n', [fileName '.pdf']);
 end
 
-%% %%%%% %%%%%%% %%%%%%% --- Main Func End --- %%%%%%% %%%%%%% %%%%% %%
+%% ----------------- Main Func End ----------------- %%
+
+
+
+%% Function needed to setup the test
+function [Type, numTestProb, parameters_per, parameters_unper] = setup_correctionRatio()
+% Determine which set of problems to test on.
+% Choose from the following two values:
+% random, random_degen
+fprintf('1. Pls choose the test set [1-2]: \n');
+fprintf('\t [1]. Random test (primal nondegenerate)\n');
+fprintf('\t [2]. Random test (primal-dual degenerate)\n');
+usrinput_type = input('Your choice here [1-2]: ');
+
+if usrinput_type == 1
+    Type = 'random';
+elseif usrinput_type == 2
+    Type = 'random_degen';
+else
+    error('testCorrectionRatios: please choose a number from the above list');
+end
+
+% Determine which active-set prediction strategy to use.
+% In the paper, we mainly show the results of using a constant as threshold
+% value ('conservCutoff'). In the last part the paper, we also mentioned
+% the use of identification fucntion ('conservIdFunc'). Both strategies have
+% been implemented.
+actvPredStrtgy = 'conservCutoff'; % Default value conservCutoff
+% Alternative: conservIdFunc
+
+numTestProb  = 100; % set to 10 for demo. 100 for real test.
+
+% With perturbations
+parameters_per.verbose          = 0;
+parameters_per.iPer             = 1e-02;
+parameters_per.actvPredStrtgy   = actvPredStrtgy;
+parameters_per.doCrossOver      = 0;
+
+% Without perturbations
+parameters_unper.verbose        = 0;
+parameters_unper.iPer           = 0;
+parameters_unper.actvPredStrtgy = actvPredStrtgy;
+parameters_unper.doCrossOver    = 0;
+end
+
+%% Function used to solve the LP using linprog
+function [actualActv, exitflag] = solveLinprog(A,b,c)
+
+n  = size(A, 2);   A  = full(A);
+lb = zeros(n, 1);  ub = inf*ones(n, 1);
+
+% options = optimset('LargeScale', 'off', 'Algorithm','simplex','Display','off');
+% options = optimset('Algorithm','active-set','Display','off');
+options = optimset('Algorithm', 'interior-point','Display','off');
+
+[xsol,~,exitflag] = linprog(c,[],[],A,b,lb,ub,[],options);
+
+% Get actual actv
+actualActv = find(xsol<1e-05);
+end
 
 %% Function used to calculate the correction ratios
 function [falsePrediction, missedPrediction, cr] = ...
@@ -267,5 +289,22 @@ set(hleg,'Position',p);
 print('-depsc',fileName);
 [result,msg] = eps2pdf([fileName '.eps']);
 
+end
+
+%% Print iterative info
+function printHeader
+fprintf('\n%4s | %11s | %7s %7s %7s %9s | %7s %7s %7s %9s\n',...
+    'Iter', '[m,n]  ', 'FPR_PER', 'MPR_PER', 'CR_PER', 'RES_PER',...
+    'FPR_UNP', 'MPR_UNP', 'CR_UNP', 'RES_UNP');
+end
+
+function printContent(k, counter, Avgm, Avgn, falsePrediction,...
+    missedPrediction, correctionR, avgResidual)
+fprintf('%4d | [%4d %4d] | %7.2f %7.2f %7.2f %9.2e | %7.2f %7.2f %7.2f %9.2e\n',...
+    k,Avgm,Avgn,...
+    falsePrediction(counter, 1), missedPrediction(counter, 1), ...
+    correctionR(counter, 1),      avgResidual(counter, 1), ...
+    falsePrediction(counter, 2), missedPrediction(counter, 2), ...
+    correctionR(counter, 2),      avgResidual(counter, 2) );
 end
 
