@@ -22,7 +22,7 @@
 %
 % Notes:
 %   1. In the paper, we denote the perturbed algorithm as Algorithm 6.1 and
-%   the unperturbed algorithm as Algorithm 6.4.
+%   the unperturbed algorithm as Algorithm 6.2.
 %
 % -------------------------------------------------------------------------
 % 22 Jan 2013
@@ -46,7 +46,7 @@ nameOfProbSet = 'testNetlib.txt';
 % Options for the plots
 options_evalPerf = [];
 % options_evalPerf.solverNames = {'With perturbations' 'Without perturbations'};
-options_evalPerf.solverNames = {'Algorithm 6.1' 'Algorithm 6.4'};
+options_evalPerf.solverNames = {'Algorithm 6.1' 'Algorithm 6.2'};
 options_evalPerf.fileName = [ 'crossover_to_simplex_test_' Type];
 options_evalPerf.logplot = 1;
 options_evalPerf.Quiet = 0;
@@ -182,7 +182,6 @@ fprintf('Problems removed: \n');
 fprintf('%s\n',prob2test{indx})
 
 profiles = evalPerformance(T,options_evalPerf);
-% profiles.performaceProfile;
 profiles.relativePerformacne;
 
 diary off;
