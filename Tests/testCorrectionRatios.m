@@ -22,11 +22,7 @@
 %
 % Notes:
 %   1. In the paper, we denote the perturbed algorithm as Algorithm 6.1 and
-<<<<<<< local
-%   the unperturbed algorithm as Algorithm 6.3.
-=======
 %   the unperturbed algorithm as Algorithm 6.2.
->>>>>>> other
 %
 % -------------------------------------------------------------------------
 %
@@ -49,11 +45,7 @@ stopAtRangeU = 12;
 
 % Options for plots
 % Legends = {'With perturbations' 'Without perturbations'};
-<<<<<<< local
-Legends = {'Algorithm 6.1' 'Algorithm 6.3'};
-=======
 Legends = {'Algorithm 6.1' 'Algorithm 6.2'};
->>>>>>> other
 fileName = ['correction_ratio_test_' Type];
 
 %% Run the test
