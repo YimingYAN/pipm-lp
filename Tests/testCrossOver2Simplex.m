@@ -22,11 +22,7 @@
 %
 % Notes:
 %   1. In the paper, we denote the perturbed algorithm as Algorithm 6.1 and
-<<<<<<< local
-%   the unperturbed algorithm as Algorithm 6.3.
-=======
 %   the unperturbed algorithm as Algorithm 6.2.
->>>>>>> other
 %
 % -------------------------------------------------------------------------
 % 22 Jan 2013
@@ -50,11 +46,7 @@ nameOfProbSet = 'testNetlib.txt';
 % Options for the plots
 options_evalPerf = [];
 % options_evalPerf.solverNames = {'With perturbations' 'Without perturbations'};
-<<<<<<< local
-options_evalPerf.solverNames = {'Algorithm 6.1' 'Algorithm 6.3'};
-=======
 options_evalPerf.solverNames = {'Algorithm 6.1' 'Algorithm 6.2'};
->>>>>>> other
 options_evalPerf.fileName = [ 'crossover_to_simplex_test_' Type];
 options_evalPerf.logplot = 1;
 options_evalPerf.Quiet = 0;
@@ -133,14 +125,15 @@ while i<=numTestProb
         Prob = [ '\textbf{' Prob '}'];
     end
     
-    printContent(Prob, per, unper);
-    
+       
     %% Collect data
     splxIter_per(i) = per.getSplxIter; splxIter_unp(i) = unper.getSplxIter;
     mu_per(i)       = per.getMu;       mu_unp(i)       = unper.getMu;
     
     ipm_iter(i)     = per.getIPMIterCount;
     basis_diff(i)   = checkBasisDiff(per.crossover.basis, unper.crossover.basis);
+    
+    printContent(Prob, per, unper, basis_diff(i));
     
     %% Increment counter
     i = i+1;
@@ -155,11 +148,10 @@ tmp_splxIter_per(isnan(tmp_splxIter_per)) = [];
 tmp_splxIter_unp(isnan(tmp_splxIter_unp)) = [];
 % The average value of splxIter_per and _unp are calculated after removed
 % failures.
-fprintf('%10s & %4s & %4s & %9.2e & %9.2e & %9d & %9d & %9d\n',...
+fprintf('%10s & %4s & %4s & %9.2e & %9.2e & %9d & %9.2f & %9d & %9d\n',...
     'Average:', ' ', ' ', mean(mu_per), mean(mu_unp),...
-    round(mean(ipm_iter)), round(mean(tmp_splxIter_per)), round(mean(tmp_splxIter_unp)));
-
-%% Check the difference between mu0s 
+    round(mean(ipm_iter)), mean(basis_diff),...
+    round(mean(tmp_splxIter_per)), round(mean(tmp_splxIter_unp)));
 
 %% Check the degree of difference between the two bases
 fprintf('\n============================ Basis_Diff ============================\n');
@@ -171,7 +163,7 @@ fprintf('\n%s\n\n','Problems with less than 10% difference:');
 diff_less_10 = find(basis_diff < 0.1);
 fprintf('%4s %11s %8s\n', 'Idx.', 'Probs.', 'Rel_Diff');
 for j = 1:length(diff_less_10)
-    fprintf('%4d %11s %8.3f\n',...
+    fprintf('%4d %11s %8.2f\n',...
         diff_less_10(j),...
         prob2test{diff_less_10(j)},...
         basis_diff(diff_less_10(j)) );
@@ -198,6 +190,8 @@ diary off;
 end
 
 %% %%%%% %%%%%%% %%%%%%% --- Main Func End --- %%%%%%% %%%%%%% %%%%% %%
+
+
 function [Type, numTestProb, params_per, params_unper] = setup_crossover
 % Determine which set of problems to test on.
 % Choose from the following three values:
@@ -258,19 +252,6 @@ basis_diff = length(basis_diff)/length(union_bases);
 
 end
 
-function mu0s = getMu0(A,b,c)
-% Get (x0,y0,s0)
-    prob = Prob(full(A),full(b),full(c));
-    iter = Iterate(prob);
-    iter.initialPoint(prob);
-    
-    % Get mup_0 and mu_0
-    mup_0 = mean((prob.x+iPer*ones(prob.n,1) ).*(prob.s+iPer*ones(prob.n,1)));
-    mu_0  = mean( prob.x.*prob.s);
-    
-    mu0s(i,:) = [ mup_0 mu_0 ];
-end
-
 function plotBasesDiffHist(basis_diff, Type)
 scrsz = get(0,'ScreenSize');
 h1 = figure('Position',...
@@ -285,14 +266,14 @@ print(h1, '-depsc', hist_filename);
 end
 
 function printHeader
-% Header: 1    2   3    4   5  6   7  8
-fprintf('%10s & %4s & %4s & %9s & %9s & %9s & %9s & %9s \\\\ \n',...
-    'Prob', 'm', 'n', 'mu_per', 'mu_unp', 'iter_ipm', 'splx_per', 'splx_unp');
+% Header: 1       2   3      4     5     6     7   8     9
+fprintf('%10s & %4s & %4s & %9s & %9s & %9s & %9s & %9s & %9s \\\\ \n',...
+    'Prob', 'm', 'n', 'mu_per', 'mu_unp', 'iter_ipm', 'B_diff', 'splx_per', 'splx_unp');
 end
 
-function printContent(Prob, per, unper)
-    % Iter:  1        2   3       4      5      6      7      8
-    fprintf('%10s & %4d & %4d & %9.2e & %9.2e & %9d & %9d & %9d \\\\ \n',...
+function printContent(Prob, per, unper, basis_diff)
+    % Iter:  1       2     3     4       5       6      7      8     9
+    fprintf('%10s & %4d & %4d & %9.2e & %9.2e & %9d & %9.2f & %9d & %9d \\\\ \n',...
         Prob, per.prob.m, per.prob.n, per.getMu, unper.getMu,...
-        per.getIPMIterCount, per.getSplxIter, unper.getSplxIter);
+        per.getIPMIterCount, basis_diff, per.getSplxIter, unper.getSplxIter);
 end
