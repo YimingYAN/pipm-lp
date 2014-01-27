@@ -30,7 +30,7 @@ while i <= numTestProb
     
     clc;
     progress_bar_length = 100;
-    current_bar_length = round(progress_bar_length*i/numTestProb);
+    current_bar_length = floor(progress_bar_length*i/numTestProb);
     output = [repmat('=',1,current_bar_length) '>' repmat(' ', 1, progress_bar_length-current_bar_length)];
     fprintf('[%s]  - %s %% done.\n',output,num2str(100*i/numTestProb));
     

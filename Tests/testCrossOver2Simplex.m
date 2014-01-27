@@ -22,7 +22,11 @@
 %
 % Notes:
 %   1. In the paper, we denote the perturbed algorithm as Algorithm 6.1 and
+<<<<<<< local
+%   the unperturbed algorithm as Algorithm 6.3.
+=======
 %   the unperturbed algorithm as Algorithm 6.2.
+>>>>>>> other
 %
 % -------------------------------------------------------------------------
 % 22 Jan 2013
@@ -46,7 +50,11 @@ nameOfProbSet = 'testNetlib.txt';
 % Options for the plots
 options_evalPerf = [];
 % options_evalPerf.solverNames = {'With perturbations' 'Without perturbations'};
+<<<<<<< local
+options_evalPerf.solverNames = {'Algorithm 6.1' 'Algorithm 6.3'};
+=======
 options_evalPerf.solverNames = {'Algorithm 6.1' 'Algorithm 6.2'};
+>>>>>>> other
 options_evalPerf.fileName = [ 'crossover_to_simplex_test_' Type];
 options_evalPerf.logplot = 1;
 options_evalPerf.Quiet = 0;
@@ -151,6 +159,8 @@ fprintf('%10s & %4s & %4s & %9.2e & %9.2e & %9d & %9d & %9d\n',...
     'Average:', ' ', ' ', mean(mu_per), mean(mu_unp),...
     round(mean(ipm_iter)), round(mean(tmp_splxIter_per)), round(mean(tmp_splxIter_unp)));
 
+%% Check the difference between mu0s 
+
 %% Check the degree of difference between the two bases
 fprintf('\n============================ Basis_Diff ============================\n');
 fprintf('Rel. difference between bases generated from perturbed and unperturbed algs\n\n');
@@ -246,6 +256,19 @@ union_bases = union(basis1, basis2);
 basis_diff = setdiff(union_bases, intersect(basis1,basis2));
 basis_diff = length(basis_diff)/length(union_bases);
 
+end
+
+function mu0s = getMu0(A,b,c)
+% Get (x0,y0,s0)
+    prob = Prob(full(A),full(b),full(c));
+    iter = Iterate(prob);
+    iter.initialPoint(prob);
+    
+    % Get mup_0 and mu_0
+    mup_0 = mean((prob.x+iPer*ones(prob.n,1) ).*(prob.s+iPer*ones(prob.n,1)));
+    mu_0  = mean( prob.x.*prob.s);
+    
+    mu0s(i,:) = [ mup_0 mu_0 ];
 end
 
 function plotBasesDiffHist(basis_diff, Type)

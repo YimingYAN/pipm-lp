@@ -7,7 +7,7 @@ clc;
 % Determine which set of problems to test on.
 % Choose from the following three values:
 % random, netlib, random_degen
-fprintf('1. Pls choose the test set [1-2]: \n');
+fprintf('1. Pls choose the test set [1-3]: \n');
 fprintf('\t 1. Random test (primal nondegenerate)\n');
 fprintf('\t 2. Random test (primal-dual degenerate)\n');
 fprintf('\t 3. Netlib test  \n');

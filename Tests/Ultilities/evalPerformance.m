@@ -216,7 +216,11 @@ classdef evalPerformance
             end
             
             % set cap
+<<<<<<< local
+%             max_ratio = min(level,max(abs(barData)));
+=======
             %max_ratio = min(level,max(abs(barData)));
+>>>>>>> other
             max_ratio = max(abs(barData));
             barData(barData > max_ratio) = max_ratio;
             barData(barData < -max_ratio) = -max_ratio;
