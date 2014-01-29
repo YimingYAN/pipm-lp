@@ -5,13 +5,14 @@
 % Yiming Yan
 % University of Edinburgh
 
+function setup()
 %% Check system
 fprintf('Checking OS... ');
 if isunix && strcmpi(mexext,'mexa64')
-    osCheck = 1;
+    % osCheck = 1;
     fprintf('Done.\n')
 else
-    fprintf('Works only for 64bit Matlab under Linux.\n');
+    fprintf('Tested only for 32/64bit Matlab under Linux.\n');
     return;
 end
 
@@ -27,7 +28,7 @@ addpath( genpath( [currentLocation '/Tests'] ) );
 
 reply = input(' - Would like to save the paths? - (Y/N): ','s');
 if strcmpi(reply,'y')
-    try 
+    try
         savepath;
     catch % may not work
         warning('PIPM Setup: Cannot save paths. You may not have admin rights')
@@ -38,6 +39,6 @@ fprintf('Done. \n')
 
 %% Test installation
 % examples
-
+end
 
 
