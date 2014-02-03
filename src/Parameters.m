@@ -5,7 +5,7 @@ classdef Parameters < handle
     properties (SetAccess = private)
         maxIter = 100;    % Maximum number of iterations allowed
         tol     = 1.e-6;  % Convergence tolerance
-        mu_cap  = 1e-06;  % Threshold value for mu
+        mu_cap  = 1e-03;  % Threshold value for mu
         cutoff  = 1e-05;  % Threshold value for cutoff
         iPer    = 1e-02;  % Initial perturbations
         

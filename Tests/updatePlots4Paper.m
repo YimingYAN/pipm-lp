@@ -5,22 +5,23 @@ algNames = {'Algorithm 6.1' 'Algorithm 6.2'};
 % ------------------------------------------
 
 % correction rations
-files = dir('correction_ratio_test_*.mat');
+folder = 'correction_ratio_test';
+files = dir([folder '/correction_ratio_test_*.mat']);
 
 for i=1:length(files)
-    load(files(i).name);
+    load([folder '/' files(i).name]);
     Legends = algNames;
     range = stopAtRangeL : stopAtRangeU;
     plotCorrectionRatios(falsePrediction, missedPrediction,...
-        correctionR, avgResidual, range, Legends, fileName)
-    pause
+        correctionR, avgResidual, range, Legends, fileName);
 end
 
 % ------------------------------------------
 % crossover
-files = dir('crossover_to_simplex_test_*.mat');
+folder = 'crossover_test';
+files = dir([folder '/crossover_to_simplex_test_*.mat']);
 for i=1:length(files)
-    load(files(i).name);
+    load([folder '/' files(i).name]);
     options_evalPerf.solverNames = algNames;
     T = [splxIter_per splxIter_unp];
     

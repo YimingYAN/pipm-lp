@@ -77,9 +77,9 @@ classdef Output
                         fprintf(output.fid, 'Function value = %9.2e\n',...
                             prob.getFval);
                     case 3
-                        fpritnf(output.fid, '\t Cannot set basis\n');
+                        fprintf(output.fid, '\t Cannot set basis\n');
                     case 4
-                        fpritnf(output.fid, '\t Simplex failed\n');
+                        fprintf(output.fid, '\t Simplex failed\n');
                 end
             end
         end
