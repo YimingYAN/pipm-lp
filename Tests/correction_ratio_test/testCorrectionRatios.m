@@ -41,7 +41,7 @@ clc;
 
 % -------------------------------------------------------------------------
 stopAtRangeL = 8;
-stopAtRangeU = 12;
+stopAtRangeU = 16;
 
 % Options for plots
 % Legends = {'With perturbations' 'Without perturbations'};
