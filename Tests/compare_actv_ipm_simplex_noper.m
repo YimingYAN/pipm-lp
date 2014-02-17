@@ -1,48 +1,68 @@
 clc;
 clear;
 
+disp('[1] random test');
+disp('[2] random degenerate')
+randomTest = input('Choose test [1-2]: ');
 %% Threshold
-demo = 1;
-
-% demo = 0;
-
-
-%% setup
 C = [1e-06 1e-05 1e-04 1e-03];
-if demo
-    numTestProb = 20;
-    diary('compare_actv_ipm_simplex_noper_demo.log');
-else
-    numTestProb = 100;
-    diary('compare_actv_ipm_simplex_noper.log');
-    fprintf('\n%9s %9s\n', 'C', 'rel_diff_avg');
-end
+% C = 1e-05
+numTestProb =20;
+!rm compare_actv_ipm_simplex_noper_demo.log
+diary('compare_actv_ipm_simplex_noper_demo.log');
+
+%% Without perturbations
+params_unper.verbose        = 0;
+params_unper.iPer           = 0;
+params_unper.actvPredStrtgy = 'conservCutoff';
+params_unper.doCrossOver    = 0;
+params_unper.mu_cap         = 1e-09;
+params_unper.tol            = 1e-09;
+
 for i = 1:length(C)
     %% Reset the random number generator
     rng('default');
     rng(1);
-    diff = 0;
-    rel_diff = zeros(numTestProb,1);
     
-    if demo
-        fprintf('\n\nC = %9.2e\n\n', C(i));
-        fprintf('%4s %4s %10s %12s %10s %10s %s\n',...
-            'Prob', 'n', 'actv_ipm', 'actv_simplex', 'dff', 'rel_diff', 'ipm in simplex?');
-    end
+    diff_ipm_splx = 0;
+    diff_unper_ipm = 0;
+    diff_unper_splx = 0;
+    
+    rel_diff_ipm_splx = zeros(numTestProb,1);
+    rel_diff_unper_ipm = rel_diff_ipm_splx;
+    rel_diff_unper_splx = rel_diff_ipm_splx;
+    
+    fprintf('\n\nC = %9.2e\n\n', C(i));
+    fprintf('%4s %4s %10s %10s %10s %10s %13s %13s %13s %10s %13s %10s %10s %10s\n',...
+        'Prob', 'n', 'actv_unper', 'actv_ipm', 'actv_splx',...
+        'd_unp_ipm', 'r_d_unp_ipm', ...
+        'd_unp_splx', 'r_d_unp_splx',...
+        'd_ipm_splx', 'r_d_ipm_splx',...
+        'unper<ipm', 'unper<splx', 'ipm<splx');
     
     for j=1:numTestProb
-        [A, b, c] = ...
-            generateRandomProb('m_min',10,'m_max',200,...
-            'n_min',20,'n_max',500);
+        if randomTest == 1
+            [A, b, c] = ...
+                generateRandomProb('m_min',10,'m_max',200,...
+                'n_min',20,'n_max',500);
+            
+        elseif randomTest == 2
+            
+            
+            [A, b, c] =...
+                generateDegenProb('m_min',10,'m_max',200,...
+                'n_min',20,'n_max',500);
+        end
+        %% Unper
+        unper = pipm(A,b,c,params_unper); unper.solve;
+        x_unper = unper.prob.x;
+        actv_unper = find(x_unper < C(i));
         
-%         [A, b, c] =...
-%             generateDegenProb('m_min',10,'m_max',200,...
-%             'n_min',20,'n_max',500);
         
+        %% IPM
         n  = size(A, 2);   A  = full(A);
         lb = zeros(n, 1);  ub = inf*ones(n, 1);
         
-        %% IPM
         options=[];
         options = optimset('Algorithm', 'interior-point','Display','off');
         
@@ -59,28 +79,34 @@ for i = 1:length(C)
         
         %        actv_simplex = find(x_simplex == 0);
         %         actv_simplex = find(x_simplex < 1e-05);
-        actv_simplex = find(x_simplex < C(i));
+        actv_splx = find(x_simplex < C(i));
         
         %% stat
-        diff = setdiff(actv_ipm, actv_simplex);
+        diff_unper_ipm = setdiff(actv_unper, actv_ipm);
+        diff_unper_splx = setdiff(actv_unper, actv_splx);
+        diff_ipm_splx = setdiff(actv_ipm, actv_splx);
         
-        chk = isempty(diff);
+        chk_unper_ipm  = isempty(diff_unper_ipm);
+        chk_unper_splx = isempty(diff_unper_splx);
+        chk_ipm_splx   = isempty(diff_ipm_splx);
         
-        diff = union( diff, setdiff(actv_simplex, actv_ipm) );
+        diff_unper_ipm = union( diff_unper_ipm, setdiff(actv_ipm, actv_unper));
+        diff_unper_splx = union( diff_unper_splx, setdiff(actv_splx, actv_unper));
+        diff_ipm_splx = union( diff_ipm_splx, setdiff(actv_splx, actv_ipm) );
         
-        rel_diff(j) = length(diff)/length(actv_simplex);
+        rel_diff_unper_ipm(j) = length(diff_unper_ipm)/length(actv_ipm);
+        rel_diff_unper_splx(j) = length(diff_unper_splx)/length(actv_splx);
+        rel_diff_ipm_splx(j) = length(diff_ipm_splx)/length(actv_splx);
         
-        if demo
-            fprintf('%4d %4d %10d %12d %10d %10.2f %10d\n',...
-                j, n, length(actv_ipm), length(actv_simplex),...
-                length(diff), rel_diff(j),chk );
-        end
+        fprintf('%4d %4d %10d %10d %10d %10d %13.3f %13d %13.3f %10d %13.3f %10d %10d %10d\n',...
+            j, n, length(actv_unper), length(actv_ipm), length(actv_splx),...
+            length(diff_unper_ipm), rel_diff_unper_ipm(j),...
+            length(diff_unper_splx), rel_diff_unper_splx(j),...
+            length(diff_ipm_splx), rel_diff_ipm_splx(j),...
+            chk_unper_ipm, chk_unper_splx, chk_ipm_splx);
     end
-    if demo
-        fprintf('--------------------------------------------------------\n')
-        fprintf('Average %36s %10.2f\n', ' ', mean(rel_diff));
-    else
-        fprintf('%9.2e %9.2f\n',C(i), mean(rel_diff));
-    end
+    fprintf('--------------------------------------------------------------------------------------------------------------------------------------------\n')
+    fprintf('Average %45s %13.3f %13s %13.3f %10s %13.3f\n', ' ',...
+        mean(rel_diff_unper_ipm), ' ', mean(rel_diff_unper_splx),' ', mean(rel_diff_ipm_splx));
 end
 diary off;

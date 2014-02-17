@@ -25,12 +25,14 @@ classdef crossOver < handle
             end
             
             % Generate lp model for lpsolve
-            e = zeros(1,prob.m);
-            crossover.lp = lp_maker(prob.c, prob.A, prob.b,...
-                e, zeros(prob.n,1), [], [], 1, 0);
-            mxlpsolve('set_presolve', crossover.lp, 0);
-            mxlpsolve('set_minim', crossover.lp);
-            mxlpsolve('set_timeout', crossover.lp, parameters.sectimeout);
+            if parameters.doCrossOver
+                e = zeros(1,prob.m);
+                crossover.lp = lp_maker(prob.c, prob.A, prob.b,...
+                    e, zeros(prob.n,1), [], [], 1, 0);
+                mxlpsolve('set_presolve', crossover.lp, 0);
+                mxlpsolve('set_minim', crossover.lp);
+                mxlpsolve('set_timeout', crossover.lp, parameters.sectimeout);
+            end
         end
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
