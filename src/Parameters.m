@@ -52,6 +52,9 @@ classdef Parameters < handle
                 if isfield(parameters_input, 'maxIter')
                     parameters.maxIter = parameters_input.maxIter;
                 end
+                if isfield(parameters_input, 'tol')
+                    parameters.tol = parameters_input.tol;
+                end
                 if isfield(parameters_input, 'mu_cap')
                     parameters.mu_cap = parameters_input.mu_cap;
                 end
