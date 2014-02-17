@@ -10,8 +10,8 @@ clear;
 
 load verify;
 
-lambda = [0.01; 0.05];
-lambda = 1*rand*[1; 5];
+% lambda = [0.01; 0.05];
+lambda = rand*[1; 5];
 disp('    lambda:') 
 disp(lambda)
 disp(' ')
