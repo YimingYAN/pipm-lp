@@ -6,6 +6,7 @@ disp('[2] random degenerate')
 randomTest = input('Choose test [1-2]: ');
 %% Threshold
 C = [1e-06 1e-05 1e-04 1e-03];
+
 % C = 1e-05
 numTestProb =20;
 !rm compare_actv_ipm_simplex_noper_demo.log

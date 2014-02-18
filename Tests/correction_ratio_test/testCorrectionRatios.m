@@ -32,7 +32,6 @@
 
 %% ----------------- Main Func -------------------- %%
 function testCorrectionRatios
-clear all;
 close all;
 clc;
 
@@ -215,9 +214,9 @@ function [actualActv, exitflag] = solveLinprog(A,b,c)
 n  = size(A, 2);   A  = full(A);
 lb = zeros(n, 1);  ub = inf*ones(n, 1);
 
-% options = optimset('LargeScale', 'off', 'Algorithm','simplex','Display','off');
+options = optimset('LargeScale', 'off', 'Algorithm','simplex','Display','off');
 % options = optimset('Algorithm','active-set','Display','off');
-options = optimset('Algorithm', 'interior-point','Display','off');
+% options = optimset('Algorithm', 'interior-point','Display','off');
 
 [xsol,~,exitflag] = linprog(c,[],[],A,b,lb,ub,[],options);
 
