@@ -40,7 +40,7 @@ clc;
 [Type, numTestProb, params_per, params_unper] = setup_correctionRatio;
 
 % -------------------------------------------------------------------------
-stopAtRangeL = 8;
+stopAtRangeL = 6;
 stopAtRangeU = 18;
 
 % Options for plots
@@ -197,16 +197,16 @@ parameters_per.verbose          = 0;
 parameters_per.iPer             = 1e-02;
 parameters_per.actvPredStrtgy   = actvPredStrtgy;
 parameters_per.doCrossOver      = 0;
-parameters_per.mu_cap           = 1e-12;     % avoid termination by mu_cap
-parameters_per.tol              = 1e-12;
+parameters_per.mu_cap           = 1e-32;     % avoid termination by mu_cap
+parameters_per.tol              = 1e-32;     % avoid termination by tol
 
 % Without perturbations
 parameters_unper.verbose        = 0;
 parameters_unper.iPer           = 0;
 parameters_unper.actvPredStrtgy = actvPredStrtgy;
 parameters_unper.doCrossOver    = 0;
-parameters_unper.mu_cap         = 1e-12;     % avoid termination by mu_cap
-parameters_unper.tol            = 1e-12;
+parameters_unper.mu_cap         = 1e-32;     % avoid termination by mu_cap
+parameters_unper.tol            = 1e-32;     % avoid termination by tol
 end
 
 %% Function used to solve the LP using linprog
@@ -284,7 +284,7 @@ set(h,'XTick',range);
 set(h,'XLim',[range(1) range(end)+0.1]);
 set(h(1:3),'YLim',[-0.1 1.1]);
 set(h(4), 'YLim',[floor(min(min(log10(avgResidual)))) ceil(max(max(log10(avgResidual))))]);
-set(h,'XGrid','on','YGrid','on');
+set(h,'XGrid','off','YGrid','on');
 set(h(4),'YTick', floor(min(min(log10(avgResidual)))):1:ceil(max(max(log10(avgResidual)))));
 hleg = legend(Legends,'Orientation','horizontal');
 p =get(hleg,'Position');
