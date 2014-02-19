@@ -70,7 +70,7 @@ classdef pipm < handle
             %% Main loop
             p.output.printHeader(p.prob, p.parameters)
             while ~p.iter.checkTermination(p.counter, p.parameters, p.status);
-                iter_info(p.counter.iterN+1,:) = [p.counter.iterN p.getMu p.prob.x' p.perturbations.lambda']; save('iter_info.mat','iter_info');
+                %iter_info(p.counter.iterN+1,:) = [p.counter.iterN p.getMu p.prob.x' p.perturbations.lambda']; save('iter_info.mat','iter_info');
                 
                 % Output
                 p.output.printIterations(p.prob, p.counter, p.iter, p.parameters, p.perturbations)
@@ -96,7 +96,7 @@ classdef pipm < handle
                 % Increase counter
                 p.counter.incrementIterationCount;
             end % End while
-            iter_info(p.counter.iterN+1,:) = [p.counter.iterN p.getMu p.prob.x' p.perturbations.lambda']; save('iter_info.mat','iter_info');
+            %iter_info(p.counter.iterN+1,:) = [p.counter.iterN p.getMu p.prob.x' p.perturbations.lambda']; save('iter_info.mat','iter_info');
             
             % Output the info of the final ipm iteration 
             p.output.printIterations(p.prob, p.counter, p.iter,...

@@ -40,7 +40,7 @@ clc;
 
 % -------------------------------------------------------------------------
 stopAtRangeL = 6;
-stopAtRangeU = 18;
+stopAtRangeU = 20;
 
 % Options for plots
 % Legends = {'With perturbations' 'Without perturbations'};
@@ -196,16 +196,16 @@ parameters_per.verbose          = 0;
 parameters_per.iPer             = 1e-02;
 parameters_per.actvPredStrtgy   = actvPredStrtgy;
 parameters_per.doCrossOver      = 0;
-parameters_per.mu_cap           = 1e-32;     % avoid termination by mu_cap
-parameters_per.tol              = 1e-32;     % avoid termination by tol
+parameters_per.mu_cap           = 1e-09;     % terminate by mu_cap and tol
+parameters_per.tol              = 1e-09;     % to aviod ill-conditioning 
 
 % Without perturbations
 parameters_unper.verbose        = 0;
 parameters_unper.iPer           = 0;
 parameters_unper.actvPredStrtgy = actvPredStrtgy;
 parameters_unper.doCrossOver    = 0;
-parameters_unper.mu_cap         = 1e-32;     % avoid termination by mu_cap
-parameters_unper.tol            = 1e-32;     % avoid termination by tol
+parameters_unper.mu_cap         = 1e-09;     % terminate by mu_cap and tol
+parameters_unper.tol            = 1e-09;     % to aviod ill-conditioning 
 end
 
 %% Function used to solve the LP using linprog
