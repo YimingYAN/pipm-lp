@@ -225,6 +225,7 @@ numTestProb = 100;          % Set to 10 for demo. 100 for real test.
 params_per.verbose = 0;
 params_per.iPer = 1e-02;
 params_per.mu_cap = 1e-03;
+%params_per.tol = 1e-32;
 params_per.actvPredStrtgy = actvPredStrtgy;
 params_per.doCrossOver = 1;
 
@@ -232,6 +233,7 @@ params_per.doCrossOver = 1;
 params_unper.verbose = 0;
 params_unper.iPer = 0;
 params_unper.actvPredStrtgy = actvPredStrtgy;
+%params_unper.tol = 1e-32;
 params_unper.doCrossOver = 1;
 end
 
