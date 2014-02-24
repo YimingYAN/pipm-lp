@@ -52,9 +52,9 @@ stopAtRangeU = 18;
 % Options for plots
 Legends = { 'Alg 6.1 - Splx'  'Alg 6.1 - IPM'  'Alg 6.2\_P - Splx\_P' 'Alg 6.2\_P - IPM\_P' };
 % lineStyle = {'-ro' '--b*' '-kv' '--m+'};
-colors = {'r' 'b' 'y' 'g'};
+colors = {'r' 'b' [0.5 0 0.5] [0.62 0.51 0.44]}; 
 lineStyles = {'-' '--' '-' '--'};
-markers = {'o' '*' 'v' '+'};
+markers = {'o' '*' 'v' '^'};
 fileName = ['correction_ratio_test_2_' Type];
 
 %% Run the test
