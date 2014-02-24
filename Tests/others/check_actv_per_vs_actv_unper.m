@@ -2,11 +2,21 @@
 % acrive-set of the perturbed porblem and the actual active-set of the
 % original problem. We are trying to answer the following questions:
 %
-% 1. Are the actual active sets the same?
+% 1. Are the actual active sets the same? - if the perturbed active-set
+% obtained by ipm is not the same the orginal active-set obtianed from ipm
+% and the pertuebd active-set obtained from simplex is not the same same 
+% either as the orginal active-set obtianed from simplex, we consider those
+% two sets are different.
 %
-% 2. Do the pertuebed problems have unique and nodegenerate solution?
+% 2. Do the pertuebed problems have unique solution? - if the perturbed 
+% active-set obtained ipm is the same as that obtained from the simplex,
+% we consider the perturbed problem has a unique solution.
+% 
+% 3. If the perturbed problem has a unique solution, is it nondegenerate?
+%   - if the number of the non-zero components are greater thatn m, we
+%   consider it as nondegenerate.
 %
-% 3. Is it true that when the perturbation are small enough perturbed
+% 4. Is it true that when the perturbation are small enough perturbed
 % problems have the same active-set as the original problem?
 %
 % Date  : 23 Feb 2014
@@ -18,20 +28,28 @@ clear;
 disp('[1] random test');
 disp('[2] random degenerate')
 randomTest = input('Choose test [1-2]: ');
+if randomTest == 1
+    disp('Start the random test...');
+    logName = [ mfilename '_random.log'];
+elseif randomTest == 2
+    disp('Start the random_degen test...');
+    logName = [ mfilename '_random_degen.log'];
+end
 
-disp(['Start the test ' num2str(randomTest)]);
 %% Threshold
 % C = [1e-06 1e-05 1e-04];
 C = 1e-05;
 K = [0 10 18];
 % the second number is chosen by having largest gap between pac and oac
-
-
-% C = 1e-05
 numTestProb = 100;
 
-!rm check_ac_p_ipm_vs_actv_unper.log
-diary('check_ac_p_ipm_vs_actv_unper.log');
+% C = 1e-05
+
+if exist(logName, 'file')
+    delete(logName);
+end
+
+diary(logName);
 
 %% Without perturbations
 params_per.verbose        = 0;
@@ -49,8 +67,9 @@ optn_splx = optimset('LargeScale', 'off', 'Algorithm','simplex','Display','off')
 
 %fprintf('\n\nC = %9.2e\n\n', C(i));
 
-num_pac_ne_oac               = zeros(length(K) + 1, 1);
-num_per_unique_nondeg        = num_pac_ne_oac;
+num_pac_ne_oac              = zeros(length(K) + 1, 1);
+num_per_unique              = num_pac_ne_oac;
+num_per_nondegen_in_unique  = num_pac_ne_oac;
 
 rel_diff_up_ip_sl   = zeros(numTestProb, length(K) + 1);
 rel_diff_p_up_ipm   = rel_diff_up_ip_sl;
@@ -122,16 +141,16 @@ for k = 1:length(K) + 1
         
         % solve this perturbed problem using ipm
         
-        [p_ipm] = linprog(cp, [], [], A, bp, lb, ub, [], optn_ipm);
+        [p_ipm]  = linprog(cp, [], [], A, bp, lb, ub, [], optn_ipm);
         ac_p_ipm = find(p_ipm < C);
         
         % solve this perturbed problem using simplex
-        [p_splx] = linprog(cp, [], [], A, bp, lb, ub, [], optn_splx);
+        [p_splx]  = linprog(cp, [], [], A, bp, lb, ub, [], optn_splx);
         ac_p_splx = find( p_splx < C  );
         
         %% Solve the original problem using linprog
         % solve the original problme using IPM
-        [x_ipm] = linprog(c,[],[],A,b,lb,ub,[],optn_ipm);
+        [x_ipm]   = linprog(c,[],[],A,b,lb,ub,[],optn_ipm);
         ac_up_ipm = find(x_ipm < C );
         
         %% solve the original problme using simplex
@@ -154,13 +173,16 @@ for k = 1:length(K) + 1
         diff_p_up_ipm   = union( diff_p_up_ipm,  setdiff(ac_up_ipm,  ac_p_ipm) );
         diff_p_up_splx  = union( diff_p_up_splx, setdiff(ac_up_splx, ac_p_splx));
         
-        rel_diff_p_ip_sl(j,k)     = length(diff_p_ip_sl)  / length(ac_p_splx);
-        rel_diff_up_ip_sl(j,k)    = length(diff_up_ip_sl) / length(ac_up_splx);
-        rel_diff_p_up_ipm(j,k)    = length(diff_p_up_ipm) / length(ac_up_ipm);
-        rel_diff_p_up_splx(j,k)   = length(diff_p_up_splx)/ length(ac_up_splx);
+        rel_diff_p_ip_sl(j,k)   = length(diff_p_ip_sl)  / length(ac_p_splx);
+        rel_diff_up_ip_sl(j,k)  = length(diff_up_ip_sl) / length(ac_up_splx);
+        rel_diff_p_up_ipm(j,k)  = length(diff_p_up_ipm) / length(ac_up_ipm);
+        rel_diff_p_up_splx(j,k) = length(diff_p_up_splx)/ length(ac_up_splx);
         
         if isempty(diff_p_ip_sl)
-            num_per_unique_nondeg(k) = num_per_unique_nondeg(k) + 1;
+            num_per_unique(k) = num_per_unique(k) + 1;
+            if length(ac_p_splx) <= n - m 
+                num_per_nondegen_in_unique(k) = num_per_nondegen_in_unique(k) + 1;
+            end
         end
         
         if ~isempty(diff_p_up_ipm) || ~isempty(diff_p_up_splx)
@@ -182,20 +204,23 @@ for k = 1:length(K) + 1
         
     end
     fprintf('--------------------------------------------------------------------------------------------------------------------------------------------\n');
-    fprintf('num_per_unique_nondeg (%%) = %d (%5.2f%%) \n', num_per_unique_nondeg(k), num_per_unique_nondeg(k)*100/numTestProb);
-    fprintf('num_pac_ne_oac (%%)        = %d (%5.2f%%) \n', num_pac_ne_oac(k), num_pac_ne_oac(k)*100/numTestProb );
-    fprintf('num_pac_eql_oac (%%)       = %d (%5.2f%%) \n', numTestProb - num_pac_ne_oac(k), 100*(1- num_pac_ne_oac(k)/numTestProb) );
+    fprintf('num_per_unique (%%)               = %d (%5.2f%%) \n', num_per_unique(k), num_per_unique(k)*100/numTestProb);
+    fprintf('num_per_nondegen_in_unique_ (%%)  = %d (%5.2f%%) \n', num_per_nondegen_in_unique(k), num_per_nondegen_in_unique(k)*100/num_per_unique(k));
+    fprintf('num_pac_ne_oac (%%)               = %d (%5.2f%%) \n', num_pac_ne_oac(k), num_pac_ne_oac(k)*100/numTestProb );
+    fprintf('num_pac_eql_oac (%%)              = %d (%5.2f%%) \n', numTestProb - num_pac_ne_oac(k), 100*(1- num_pac_ne_oac(k)/numTestProb) );
 end
 %end
 
 %% Summary table
 disp('============')
-fprintf('\n%9s %15s %15s %15s %15s %15s\n',....
-    'lambda', '%_p_uni_ndeg', '%_pac_ne_oac',...
+fprintf('\n%9s %10s %20s %13s %15s %15s %15s\n',....
+    'lambda', '%_p_uni', '#_p_uni_ndeg/#_p_uni', '%_pac_ne_oac',...
     'avg_r_p_ip_sl', 'avg_r_p_up_ip', 'avg_r_p_up_sp');
 for i = 1: length(num_pac_ne_oac)
-    fprintf('%9.2e %14.2f%% %14.2f%% %14.2f%% %14.2f%% %14.2f%%\n',...
-        lambdas(i), 100*num_per_unique_nondeg(i)/numTestProb, 100*num_pac_ne_oac(i)/numTestProb,...
+    fprintf('%9.2e %9.2f%% %19.2f%% %12.2f%% %14.2f%% %14.2f%% %14.2f%%\n',...
+        lambdas(i), 100*num_per_unique(i)/numTestProb,...
+        100*num_per_nondegen_in_unique(i)/num_per_unique(i),....
+        100*num_pac_ne_oac(i)/numTestProb,...
         100*mean(rel_diff_p_ip_sl(:,i)),...
         100*mean(rel_diff_p_up_ipm(:,i)),...
         100*mean(rel_diff_p_up_splx(:,i)));
