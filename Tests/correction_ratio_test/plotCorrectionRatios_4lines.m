@@ -1,6 +1,13 @@
 %% Function used to calculate the correction ratios - 4 lines
 function plotCorrectionRatios_4lines(falsePrediction, missedPrediction,...
     correctionR, avgResidual, range, Legends, fileName, colors, lineStyles, markers)
+% PLOTCORRECTIONRATIOS This function plots the prediction ratios, including 
+% false prediction, missed prediction and correction ratios.
+%
+% Date  : 22 Feb 2014
+% Author: Yiming Yan
+
+
 clf;
 
 titles = {'False Prediction Ratio',...

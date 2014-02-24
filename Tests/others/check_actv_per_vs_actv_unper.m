@@ -6,8 +6,8 @@
 %
 % 2. Do the pertuebed problems have unique and nodegenerate solution?
 %
-% 3. Is it true when the perturbation are small enough perturbed problems
-% have the same active-set as the original problem?
+% 3. Is it true that when the perturbation are small enough perturbed
+% problems have the same active-set as the original problem?
 %
 % Date  : 23 Feb 2014
 % Author: Yiming Yan
@@ -23,9 +23,9 @@ disp(['Start the test ' num2str(randomTest)]);
 %% Threshold
 % C = [1e-06 1e-05 1e-04];
 C = 1e-05;
-K = [0 10 18];    
-% the second number is chosen by having largest gap between pac and oac 
-                  
+K = [0 10 18];
+% the second number is chosen by having largest gap between pac and oac
+
 
 % C = 1e-05
 numTestProb = 100;
@@ -56,7 +56,9 @@ rel_diff_up_ip_sl   = zeros(numTestProb, length(K) + 1);
 rel_diff_p_up_ipm   = rel_diff_up_ip_sl;
 rel_diff_p_up_splx  = rel_diff_up_ip_sl;
 rel_diff_p_ip_sl    = rel_diff_up_ip_sl;
-    
+
+lambdas = zeros(length(K) + 1,1);
+
 
 for k = 1:length(K) + 1
     %% Reset the random number generator
@@ -98,13 +100,16 @@ for k = 1:length(K) + 1
         % get iper
         if k <= length(K)
             kth = K(k);
-            params_per.iPer = 1e-02;
+            params_per.iPer    = 1e-02;
             params_per.maxIter = K(k);
             per = pipm(A,b,c,params_per); per.solve;
-            current_p = per.perturbations.lambda;
+            
+            current_p  = per.perturbations.lambda;
+            lambdas(k) = mean(current_p);
             
         else
             current_p = 0*ones(n,1);
+            lambdas(k)=0;
             kth = -1;
         end
         
@@ -174,7 +179,7 @@ for k = 1:length(K) + 1
             length(diff_up_ip_sl),  100*rel_diff_up_ip_sl(j,k),...
             length(diff_p_up_ipm),  100*rel_diff_p_up_ipm(j,k),...
             length(diff_p_up_splx), 100*rel_diff_p_up_splx(j,k) );
-        %             disp(chk_per_splx)
+        
     end
     fprintf('--------------------------------------------------------------------------------------------------------------------------------------------\n');
     fprintf('num_per_unique_nondeg (%%) = %d (%5.2f%%) \n', num_per_unique_nondeg(k), num_per_unique_nondeg(k)*100/numTestProb);
@@ -190,7 +195,7 @@ fprintf('\n%9s %15s %15s %15s %15s %15s\n',....
     'avg_r_p_ip_sl', 'avg_r_p_up_ip', 'avg_r_p_up_sp');
 for i = 1: length(num_pac_ne_oac)
     fprintf('%9.2e %14.2f%% %14.2f%% %14.2f%% %14.2f%% %14.2f%%\n',...
-        0, 100*num_per_unique_nondeg(i)/numTestProb, 100*num_pac_ne_oac(i)/numTestProb,...
+        lambdas(i), 100*num_per_unique_nondeg(i)/numTestProb, 100*num_pac_ne_oac(i)/numTestProb,...
         100*mean(rel_diff_p_ip_sl(:,i)),...
         100*mean(rel_diff_p_up_ipm(:,i)),...
         100*mean(rel_diff_p_up_splx(:,i)));
