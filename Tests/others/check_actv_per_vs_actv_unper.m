@@ -127,8 +127,8 @@ for k = 1:length(K) + 1
             lambdas(k) = mean(current_p);
             
         else
-            current_p = 0*ones(n,1);
-            lambdas(k)=0;
+            current_p = 1e-06*ones(n,1);
+            lambdas(k)= 1e-06;
             kth = -1;
         end
         
