@@ -51,7 +51,7 @@ stopAtRangeU = 18;
 
 % Options for plots
 Legends = { 'Alg 6.1 - Splx'  'Alg 6.1 - IPM'  'Alg 6.2 - Splx' 'Alg 6.2 - IPM' };
-colors = {'r' 'b' 'k' 'g'};
+colors = {'r' 'b' 'k' [0 .5 0]};
 lineStyles = {'-' '--' '-' '--'};
 markers = {'o' '*' 's' 'd'};
 fileName = ['correction_ratio_test_' Type];

@@ -41,7 +41,7 @@ end
 C = 1e-05;
 K = [0 10 18];
 % the second number is chosen by having largest gap between pac and oac
-numTestProb = 100;
+numTestProb = 10;
 
 % C = 1e-05
 
@@ -204,6 +204,8 @@ for k = 1:length(K) + 1
         
     end
     fprintf('--------------------------------------------------------------------------------------------------------------------------------------------\n');
+    fprintf('avg_rel_diff_p_up_ipm             = %5.2f%%      \n', 100*mean(rel_diff_p_up_ipm(:,k)));
+    fprintf('avg_rel_diff_p_up_splx            = %5.2f%%      \n', 100*mean(rel_diff_p_up_splx(:,k)));
     fprintf('num_per_unique (%%)               = %d (%5.2f%%) \n', num_per_unique(k), num_per_unique(k)*100/numTestProb);
     fprintf('num_per_nondegen_in_unique_ (%%)  = %d (%5.2f%%) \n', num_per_nondegen_in_unique(k), num_per_nondegen_in_unique(k)*100/num_per_unique(k));
     fprintf('num_pac_ne_oac (%%)               = %d (%5.2f%%) \n', num_pac_ne_oac(k), num_pac_ne_oac(k)*100/numTestProb );
@@ -212,6 +214,9 @@ end
 %end
 
 %% Summary table
+disp('============')
+fprintf('#_PD_different_actv      = %d\n,', sum(rel_diff_up_ip_sl(:,1) < 1e-05));
+
 disp('============')
 fprintf('\n%9s %10s %20s %13s %15s %15s %15s\n',....
     'lambda', '%_p_uni', '#_p_uni_ndeg/#_p_uni', '%_pac_ne_oac',...
@@ -226,5 +231,7 @@ for i = 1: length(num_pac_ne_oac)
         100*mean(rel_diff_p_up_splx(:,i)));
     
 end
+
+save(logName(1:end-4));
 
 diary off;
