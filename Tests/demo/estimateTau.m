@@ -1,47 +1,52 @@
-% This script is used to estimate the constant tau_p needed for
-% the error bounds.
-% Random problem is tested.
+% find the value of tau_p and tau_d numerically for problem
+% verify.
+%
+% Essentially we are solving
+%           max ||x-x*||/(r(x,s) + w(x,s))
+%           s.t. Ax = b, A'y+s = c, x + lambda > 0, s + lambda > 0
+%
 
-% Uncomment iter_x(:,p.counter.iterN+1) = p.prob.x; iter_s(:,p.counter.iterN+1) = p.prob.s; iter_y(:,p.counter.iterN+1) = p.prob.y; save('iter_xys.mat', 'iter_x', 'iter_y', 'iter_s');
-% in pipm
-
-function estimateTau()
-
+clear;
 clc;
 close all;
 
-load verify6.mat
 
-param.mu_cap = 1e-09;
-param.tol = 1e-09;
-param.verbose = 0;
-param.doCrossOver = 0;
+load verify;
 
-% with per
-% disp('With per')
-param.iPer = 1e-02;
-p1 = pipm(A,b,c,param);
-p1.solve;
+[m,n] = size(A);
 
-load iter_xys.mat;
-X = iter_x; Y = iter_y; S = iter_s;
+Aeq = [ A zeros(m,n) zeros(m,m);
+    zeros(n,n) eye(n) A'];
 
-% X: each column of X contians iterate of x
+beq = [b;c];
 
-%% estimate tau_p
-L = size(X,2);
-tau_p = zeros(L,1);
+t0 = [1;1;1;1;1];
 
-for i =1: L
-    eb = errorBounds(A, b, c, X(:,i), Y(:,i), S(:,i));
+ub = inf*ones(5,1);
+
+options = optimset('Display', 'off','Algorithm','active-set');
+range = -10:10; range = 10.^range;
+
+for i = 1 : length(range)
+    lambda = range(i);
+ 
+    lb = [-lambda; -5*lambda; -lambda; -5*lambda; -inf];
     
-    tau_p(i) = norm( X(:,i) - optx)/eb;
+    [x,fval1,exitflag] = fmincon('dist_x', t0, [], [], Aeq, beq,lb, ub, [], options);
+    [x,fval2,exitflag] = fmincon('dist_s', t0, [], [], Aeq, beq,lb, ub, [], options);
+    
+    tau_p(i) = -fval1;
+    tau_d(i) = -fval2;
 end
 
-tau_p
+figure;
+fig_x = plot(log10(range),tau_p,'-*b');
+xlabel('log10($\lambda$)','interpreter','latex');
+ylabel('$\tau_{p}$','interpreter','latex');
+title('$\tau_{p}$ versus $\lambda$','interpreter','latex')
 
-tau_p = mean(tau_p)
-
-delete iter_xys.mat
-
-end
+figure;
+fig_s = plot(log10(range),tau_d,'-*r');
+xlabel('log10($\lambda$)','interpreter','latex');
+ylabel('$\tau_{d}$','interpreter','latex');
+title('$\tau_{d}$ versus $\lambda$','interpreter','latex')
