@@ -1,6 +1,6 @@
 PIPM: Perturbed Interior Point Methods for LP
 ---------------------------------------------------------------------------
-Description:
+**Description**:
 An infeasible primal-dual path-following inteiror point method with 
 controlled perturbations.
 
@@ -14,19 +14,19 @@ in the standard form, i,e,
 The future version may also accept QP problems, but currently it has not 
 been implemented.
 ---------------------------------------------------------------------------
-Syntax:
+**Syntax**:
 ```
         p = pipm( A, b, c, options);
         p.solve;
 ```
 ---------------------------------------------------------------------------
-Input: 
+**Input**: 
 ```
         (A,b,c) - problem data
         options: optional input, controlling all parameters
 ```
 ---------------------------------------------------------------------------
-Example:
+**Example**:
         Please see examples.m in folder Examples
 ---------------------------------------------------------------------------
 
