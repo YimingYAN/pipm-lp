@@ -1,11 +1,10 @@
 PIPM: Perturbed Interior Point Methods for LP
----------------------------------------------------------------------------
+===============================================
+
 **Description**:
 An infeasible primal-dual path-following inteiror point method with 
 controlled perturbations.
-
-Author: Yiming Yan @ University of Edinburgh
-
+---------------------------------------------------------------------------
 The main solver PIPM (/src/pipm.m) only accepts LP problems 
 in the standard form, i,e,
 ```
@@ -29,7 +28,8 @@ been implemented.
 **Example**:
         Please see examples.m in folder Examples
 ---------------------------------------------------------------------------
-
+**Author**: Yiming Yan @ University of Edinburgh
+---------------------------------------------------------------------------
 Have Fun! :)
 
 Yiming Yan
