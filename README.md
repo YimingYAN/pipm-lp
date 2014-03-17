@@ -4,7 +4,7 @@ PIPM: Perturbed Interior Point Methods for LP
 **Description**:
 An infeasible primal-dual path-following inteiror point method with 
 controlled perturbations.
----------------------------------------------------------------------------
+
 The main solver PIPM (/src/pipm.m) only accepts LP problems 
 in the standard form, i,e,
 ```
