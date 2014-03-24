@@ -173,7 +173,7 @@ for k=stopAtRangeL:1:stopAtRangeU
     printContent(k, counter, Avgm, Avgn, falsePrediction,...
         missedPrediction, correctionR, avgResidual);
     
-    save
+    %save
     
     counter = counter+1;
 end
