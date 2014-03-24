@@ -120,18 +120,3 @@ Plotting histogram for basis_diff...
 # of Probs removed: 0
 Problems removed: 
 Plotting relative performance figure...
-{Error using figure
-Width and height must be > 0
-
-Error in evalPerformance/relativePerformacne (line 239)
-                figure('Position',...
-
-Error in testCrossOver2Simplex_IF (line 178)
-profiles.relativePerformacne;
-} 
-testCrossOver2Simplex_IF
-Pls choose the test set [1-3]: 
-	 [1]. Random test (primal nondegenerate)
-	 [2]. Random test (primal-dual degenerate)
-	 [3]. Netlib test  
-Your choice here [1-3]: 3
