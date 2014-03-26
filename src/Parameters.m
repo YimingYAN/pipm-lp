@@ -15,6 +15,7 @@ classdef Parameters < handle
                           % 'simple' - simple cutoff
                           % 'conservCutoff' - three-set with cutoff
                           % 'conservIdFunc' - three-set with idFunc
+                          % 'conservIndica' - three-set with indicator
                           
         doCrossOver = 1;  % Controlls whether or not perform crossover to
                           % simplex after ipm iterations. 
