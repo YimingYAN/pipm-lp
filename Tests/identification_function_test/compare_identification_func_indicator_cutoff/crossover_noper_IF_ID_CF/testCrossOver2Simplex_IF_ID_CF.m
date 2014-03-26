@@ -123,9 +123,8 @@ while i <= numTestProb
     mu_IF(i)       = p_IF.getMu;       mu_ID(i)       = p_ID.getMu;       mu_CF(i)       = p_CF.getMu; 
     
     ipm_iter(i)     = p_IF.getIPMIterCount;
-    %basis_diff(i)   = checkBasisDiff(p_IF.crossover.basis, p_ID.crossover.basis);
     
-    printContent(Prob, p_IF, p_ID);
+    printContent(Prob, p_IF, p_ID, p_CF);
     
     %% Increment counter
     i = i+1;
@@ -135,15 +134,15 @@ save([ 'crossover_to_simplex_test_IF_' Type '.mat']);
 
 %% Calculate the average
 fprintf('---------------------------------------------------------------------\n');
-tmp_splxIter_IF = splxIter_IF; tmp_splxIter_ID = splxIter_ID;
+tmp_splxIter_IF = splxIter_IF; tmp_splxIter_ID = splxIter_ID; tmp_splxIter_CF = splxIter_CF;
 tmp_splxIter_IF(isnan(tmp_splxIter_IF)) = [];
 tmp_splxIter_ID(isnan(tmp_splxIter_ID)) = [];
+tmp_splxIter_CF(isnan(tmp_splxIter_CF)) = [];
 % The average value of splxIter_IF and _ID are calculated after removed
 % failures.
-fprintf('%10s & %4s & %4s & %9.2e & %9.2e & %9d & %9.2f & %9d & %9d\n',...
-    'Average:', ' ', ' ', mean(mu_IF), mean(mu_ID),...
-    round(mean(ipm_iter)), mean(basis_diff),...
-    round(mean(tmp_splxIter_IF)), round(mean(tmp_splxIter_ID)));
+fprintf('%10s & %4s & %4s & %9.2e & %9.2e & %9.2e & %9d & %9d & %9d & %9d\n',...
+    'Average:', ' ', ' ', mean(mu_IF), mean(mu_ID), mean(mu_CF),...
+    round(mean(ipm_iter)), round(mean(tmp_splxIter_IF)), round(mean(tmp_splxIter_ID)), round(mean(tmp_splxIter_CF)) );
 
 %% Plot relative performance chart
 T = [splxIter_IF splxIter_ID splxIter_CF];
