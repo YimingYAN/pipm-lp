@@ -38,8 +38,8 @@ stopAtRangeU = 16;
 params_IF.verbose          = 0;
 params_IF.iPer             = 0;         % no perturbations
 params_IF.doCrossOver      = 0;
-params_IF.mu_cap           = 1e-09;     % terminate by mu_cap and tol
-params_IF.tol              = 1e-09;     % to aviod ill-conditioning
+params_IF.mu_cap           = 1e-07;     % terminate by mu_cap and tol
+params_IF.tol              = 1e-07;     % to aviod ill-conditioning
 params_IF.actvPredStrtgy   = 'conservidfunc';
 
 % ID
@@ -119,6 +119,9 @@ for k=stopAtRangeL:1:stopAtRangeU
                 [A, b, c] =...
                     generateDegenProb('m_min',10,'m_max',200,...
                     'n_min',20,'n_max',500);
+            case 'netlib'
+                load(prob2test{i});
+                 [A,b,c,FEASIBLE]=myPreprocess(A,b,c,lbounds,ubounds,BIG);
             otherwise
                 return;
         end
@@ -133,6 +136,9 @@ for k=stopAtRangeL:1:stopAtRangeU
         % Skip the test problem if linprog does not converge
         if exitflag ~= 1
             skipped = skipped + 1;
+            if strcmpi(Type, 'netlib')
+                i=i+1;
+            end
             continue;
         end
         
