@@ -191,7 +191,7 @@ end
 params_IF.verbose          = 0;
 params_IF.iPer             = 0;         % no perturbations
 params_IF.doCrossOver      = 1;         % conduct crossover
-params_IF.mu_cap           = 1e-04;     % terminate by mu_cap and tol
+params_IF.mu_cap           = 1e-03;     % terminate by mu_cap and tol
 params_IF.tol              = 1e-07;     % to aviod ill-conditioning
 params_IF.actvPredStrtgy   = 'conservidfunc';
 
