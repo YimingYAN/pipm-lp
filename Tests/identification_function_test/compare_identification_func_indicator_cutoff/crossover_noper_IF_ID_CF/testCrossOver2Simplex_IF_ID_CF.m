@@ -46,7 +46,7 @@ options_plot = [];
 options_plot.solverNames = {'Identification Function' 'Indicators' 'Cutoff'};
 options_plot.fileName = fileName;
 options_plot.logplot = 1;
-options_plot.Quiet = 0;
+options_plot.Quiet = 1;
 options_plot.isCaptions = 0;
 
 logFileName = [fileName '_log.txt'];
@@ -156,6 +156,8 @@ fprintf('Problems removed: \n');
 fprintf('%s\n',prob2test{indx})
 
 profiles = evalPerformance(T,options_plot);
+profiles.lines = {'--' '-.' ':'};
+profiles.markers= {'s' 'd' 'o'};
 profiles.performaceProfile;
 
 diary off;
@@ -189,7 +191,7 @@ end
 params_IF.verbose          = 0;
 params_IF.iPer             = 0;         % no perturbations
 params_IF.doCrossOver      = 1;         % conduct crossover
-params_IF.mu_cap           = 1e-03;     % terminate by mu_cap and tol
+params_IF.mu_cap           = 1e-04;     % terminate by mu_cap and tol
 params_IF.tol              = 1e-07;     % to aviod ill-conditioning
 params_IF.actvPredStrtgy   = 'conservidfunc';
 
@@ -201,7 +203,7 @@ params_ID.actvPredStrtgy   = 'conservindica';
 params_CF = params_IF;
 params_CF.actvPredStrtgy   = 'conservcutoff';
 
-numTestProb = 10;          % Set to 10 for demo. 100 for real test.
+numTestProb = 100;          % Set to 10 for demo. 100 for real test.
 end
 
 function printHeader

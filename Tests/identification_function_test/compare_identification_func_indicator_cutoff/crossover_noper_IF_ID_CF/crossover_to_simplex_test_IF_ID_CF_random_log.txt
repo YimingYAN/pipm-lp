@@ -1,0 +1,76 @@
+============================== Crossover Tests ==============================
+      Prob &    m &    n &     mu_IF &     mu_ID &     mu_CF &  iter_ipm &   splx_IF &   splx_ID &   splx_CF \\ 
+{Undefined function 'mxlpsolve' for input arguments of type 'char'.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('lp_maker', '/Users/yimingyan/Dropbox/MyToys/Matlab/PIPM/pipm-lp/thirdParty/lp_solve/lp_maker.m', 35)" style="font-weight:bold">lp_maker</a> (<a href="matlab: opentoline('/Users/yimingyan/Dropbox/MyToys/Matlab/PIPM/pipm-lp/thirdParty/lp_solve/lp_maker.m',35,0)">line 35</a>)
+lp_handle = mxlpsolve('make_lp', m, n);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('crossOver', '/Users/yimingyan/Dropbox/MyToys/Matlab/PIPM/pipm-lp/src/crossOver.m', 30)" style="font-weight:bold">crossOver</a> (<a href="matlab: opentoline('/Users/yimingyan/Dropbox/MyToys/Matlab/PIPM/pipm-lp/src/crossOver.m',30,0)">line 30</a>)
+                crossover.lp = lp_maker(prob.c, prob.A, prob.b,...
+
+Error in <a href="matlab:helpUtils.errorDocCallback('pipm', '/Users/yimingyan/Dropbox/MyToys/Matlab/PIPM/pipm-lp/src/pipm.m', 56)" style="font-weight:bold">pipm</a> (<a href="matlab: opentoline('/Users/yimingyan/Dropbox/MyToys/Matlab/PIPM/pipm-lp/src/pipm.m',56,0)">line 56</a>)
+            p.crossover = crossOver(p.prob, p.parameters);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('testCrossOver2Simplex_IF_ID_CF', '/Users/yimingyan/Dropbox/MyToys/Matlab/PIPM/pipm-lp/Tests/identification_function_test/compare_identification_func_indicator_cutoff/crossover_noper_IF_ID_CF/testCrossOver2Simplex_IF_ID_CF.m', 114)" style="font-weight:bold">testCrossOver2Simplex_IF_ID_CF</a> (<a href="matlab: opentoline('/Users/yimingyan/Dropbox/MyToys/Matlab/PIPM/pipm-lp/Tests/identification_function_test/compare_identification_func_indicator_cutoff/crossover_noper_IF_ID_CF/testCrossOver2Simplex_IF_ID_CF.m',114,0)">line 114</a>)
+    p_IF = pipm(A,b,c,params_IF); p_IF.solve;
+} 
+edit evalPerformance.m
+load('crossover_to_simplex_test_IF_random.mat')
+%% Plot relative performance chart
+T = [splxIter_IF splxIter_ID splxIter_CF];
+
+% Remove problems that cannot be solved by two
+indx = find(sum(isnan(T),2) > 1);
+T(indx,:) = [];
+fprintf('\n============================ Performance Profile ============================\n');
+
+============================ Performance Profile ============================
+fprintf('\n# of Probs removed: %d\n', length(indx));
+
+# of Probs removed: 0
+fprintf('Problems removed: \n');
+Problems removed: 
+fprintf('%s\n',prob2test{indx})
+
+profiles = evalPerformance(T,options_plot);
+profiles.performaceProfile;
+Plotting performance profile...
+T = [splxIter_IF splxIter_ID splxIter_CF];
+
+% Remove problems that cannot be solved by two
+indx = find(sum(isnan(T),2) > 1);
+T(indx,:) = [];
+fprintf('\n============================ Performance Profile ============================\n');
+
+============================ Performance Profile ============================
+fprintf('\n# of Probs removed: %d\n', length(indx));
+
+# of Probs removed: 0
+fprintf('Problems removed: \n');
+Problems removed: 
+fprintf('%s\n',prob2test{indx})
+
+profiles = evalPerformance(T,options_plot);
+[Warning: The class file for 'evalPerformance' has been changed, but the change cannot be applied because
+objects based on the old class file still exist. If you use those objects, you might get unexpected
+results. You can use the 'clear' command to remove those objects. See 'help clear' for information on how
+to remove those objects.] 
+profiles.performaceProfile;
+Plotting performance profile...
+profiles = evalPerformance(T,options_plot);
+profiles.performaceProfile;
+Plotting performance profile...
+clear class
+profiles = evalPerformance(T,options_plot);
+profiles.performaceProfile;
+Plotting performance profile...
+close all
+clc
+clear all
+load('crossover_to_simplex_test_IF_random.mat')
+%% Plot relative performance chart
+T = [splxIter_IF splxIter_ID splxIter_CF];
+% Remove problems that cannot be solved by two
+indx = find(sum(isnan(T),2) > 1);
+T(indx,:) = [];
+fprintf('\n============================ Performance

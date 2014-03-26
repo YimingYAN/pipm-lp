@@ -44,8 +44,8 @@ classdef evalPerformance
     properties(Access = public)
         T; % Data
         colors  = {'r' 'b' 'k' 'k' 'm' 'm' 'g' 'g'};
-        lines   = {'-' ':' '-' ':' '-' ':' '-' ':'};
-        markers = {'+' '*' 's' 'd' 'v' '^' 'p' 'h'};
+        lines   = {'-' ':' '-.' ':' '-' ':' '-' ':'};
+        markers = {'x' 'd' 's' '*' 'v' '^' 'p' 'h'};
         solverNames;
     end
     
@@ -163,7 +163,7 @@ classdef evalPerformance
                 [xs,ys] = stairs(r(:,s),(1:np)/np);
                 option = [obj.lines{s} obj.colors{s} obj.markers{s}];
                 plot(xs,ys,option,...
-                    'MarkerSize',2, 'MarkerFaceColor', obj.colors{s},...
+                    'MarkerSize',8, 'MarkerEdgeColor', obj.colors{s},...
                     'LineWidth',1);
                 %plot(xs,ys);
                 hold on;
