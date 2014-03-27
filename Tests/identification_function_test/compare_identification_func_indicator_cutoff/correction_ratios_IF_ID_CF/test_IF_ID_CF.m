@@ -55,7 +55,7 @@ Legends = { 'Identification function'  'Indicators'  'Cut-off' };
 colors = {'r' 'b' 'k'};
 lineStyles = {'-' '--' '-.'};
 markers = {'o' '*' 's'};
-fileName = ['correction_ratio_test_IF_ID_CF_ID_CF_' Type];
+fileName = ['correction_ratio_test_IF_ID_CF_' Type];
 
 %% Deterine test problems
 switch Type
