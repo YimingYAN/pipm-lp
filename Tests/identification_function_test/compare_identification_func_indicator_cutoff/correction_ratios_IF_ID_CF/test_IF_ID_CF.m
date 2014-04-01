@@ -30,6 +30,7 @@ end
 
 %% Set Parameters for ipm
 nameOfProbSet = 'netlib_IF_ID_CF.txt';
+nameOfProbSet = 'netlib_crossover_IF_ID_CF.txt';
 
 stopAtRangeL = 6;
 stopAtRangeU = 16;

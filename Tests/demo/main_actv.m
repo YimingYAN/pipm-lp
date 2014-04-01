@@ -1,5 +1,5 @@
-% This scripts tries to find out the largest value of lambda that will main
-% the optimal actv
+% This scripts tries to find out the largest value of lambda that will
+% maintain the optimal actv
 % for test problem verify.mat
 
 clear;
@@ -13,7 +13,6 @@ lb = zeros(n,1);
 
 
 
-options = optimset('Display', 'off','Algorithm','active-set');
 range = -10:10; range = 10.^range;
 
 for i = 1 : length(range)
