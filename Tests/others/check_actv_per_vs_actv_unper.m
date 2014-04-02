@@ -4,12 +4,12 @@
 %
 % 1. Are the actual active sets the same? - if the perturbed active-set
 % obtained by ipm is not the same the orginal active-set obtianed from ipm
-% and the pertuebd active-set obtained from simplex is not the same same 
-% either as the orginal active-set obtianed from simplex, we consider those
+% and the pertuebd active-set obtained from simplex is not the same  
+% as the orginal active-set obtianed from simplex either, we consider those
 % two sets are different.
 %
 % 2. Do the pertuebed problems have unique solution? - if the perturbed 
-% active-set obtained ipm is the same as that obtained from the simplex,
+% active-set obtained from ipm is the same as that obtained from the simplex,
 % we consider the perturbed problem has a unique solution.
 % 
 % 3. If the perturbed problem has a unique solution, is it nondegenerate?

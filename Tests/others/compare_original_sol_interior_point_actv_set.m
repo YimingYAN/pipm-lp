@@ -1,8 +1,11 @@
-function compare_solution_interior_point_actv_set()
-% compare_solution_interior_point_actv_set This function compares
+function compare_original_sol_interior_point_actv_set()
+% compare_original_sol_interior_point_actv_set This function compares
 % difference between the optimal solution obtained from interior point
 % solver and that from the active-set solution for random and ramdom
-% degenerate problems.
+% degenerate problems. We solve the original problem here.
+%
+% March 28 2014
+% Yiming Yan
 
 numTestProb = 100;
 
