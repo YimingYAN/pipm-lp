@@ -103,7 +103,7 @@ p = pipm(A,b,c,parameters_input);
 try 
      p.solve;
 catch err
-     sprintf(err.message)
+     fprintf('%s\n',err.message)
 end
 
 clear;
