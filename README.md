@@ -1,4 +1,4 @@
-PIPM: Perturbed Interior Point Method for LP
+Perturbed Interior Point Method for LP (PIPM)
 ===============================================
 
 **Description**:
@@ -10,8 +10,9 @@ in the standard form, i,e,
 ```
         min c'*x s.t. Ax = b, x>=0.        
 ```
-The future version may also accept QP problems, but currently it has not 
-been implemented.
+
+The future version may also accept QP problems, but currently it has not been implemented.
+
 ---------------------------------------------------------------------------
 **Syntax**:
 ```
@@ -61,18 +62,28 @@ been implemented.
         p.solve;
 ```
 ---------------------------------------------------------------------------
-**Example**:
-        Please see examples.m in folder Examples
+**Example**: 
+
+Please see examples.m in folder Examples
+
 ---------------------------------------------------------------------------
-**Author**: 
-        Yiming Yan @ University of Edinburgh
+**Author**:  
+
+Yiming Yan @ University of Edinburgh
+
 ---------------------------------------------------------------------------
 **Reference**:
+
+Coralia Cartis and Yiming Yan, 
+Active-set prediction for interior point methods using controlled perturbations,
+submitted, April 2014
 
 ---------------------------------------------------------------------------
 
 Have Fun! :)
 
 Yiming Yan
+
 University of Edinburgh
-September 20, 2013
+
+April 15, 2014
