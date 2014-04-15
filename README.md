@@ -1,7 +1,6 @@
 Perturbed Interior Point Method for LP (PIPM)
 ===============================================
 
-**Description**:
 An infeasible primal-dual path-following interior point method with 
 controlled perturbations.
 
@@ -75,7 +74,7 @@ Yiming Yan @ University of Edinburgh
 **Reference**:
 
 Coralia Cartis and Yiming Yan, 
-Active-set prediction for interior point methods using controlled perturbations,
+[Active-set prediction for interior point methods using controlled perturbations](http://www.maths.ed.ac.uk/~yan/research/papers/aiipm.pdf),
 submitted, April 2014
 
 ---------------------------------------------------------------------------
