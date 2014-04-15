@@ -39,8 +39,8 @@ The future version may also accept QP problems, but currently it has not been im
         	.iPer           Initial perturbations
                             Default value 1e-02
                                 
-        	.actvPredStrtgy String, determine the strategy of active-set prediction
-                            Default value 'conservCutoff'.
+        	.actvPredStrtgy Active-set prediction strategy
+                            Default value 'conservCutoff'
                      		'conservCutoff' - cutoff
                      		'conservIdFunc' - identification function
                      		'conservIndica' - indicators
