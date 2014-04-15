@@ -77,8 +77,6 @@ p.solve;
 
 clear;
 
-clear;
-
 %% Exmaple on choosing different actvPredStrategies
 [A, b, c] = generateRandomProb;
 parameters_input.mu_cap = 1e-03;
@@ -101,9 +99,12 @@ p.solve;
 
 % wrong setup
 parameters_input.actvPredStrtgy = 'wrongSetup';
-parameters_input.verbose = 3;
 p = pipm(A,b,c,parameters_input);
-p.solve;
+try 
+     p.solve;
+catch err
+     sprintf(err.message)
+end
 
 clear;
 
