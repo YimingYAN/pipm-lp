@@ -64,8 +64,13 @@ been implemented.
 **Example**:
         Please see examples.m in folder Examples
 ---------------------------------------------------------------------------
-**Author**: Yiming Yan @ University of Edinburgh
+**Author**: 
+        Yiming Yan @ University of Edinburgh
 ---------------------------------------------------------------------------
+**Reference**:
+
+---------------------------------------------------------------------------
+
 Have Fun! :)
 
 Yiming Yan
