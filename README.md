@@ -30,7 +30,7 @@ been implemented.
         	.iPer           Initial perturbations
 
         	.actvPredStrtgy String, determine the strategy of active-set prediction
-                     		By default it's 'conservCutoff'.
+                     		Default value 'conservCutoff'.
                      		'simple' - simple cutoff
                      		'conservCutoff' - three-set with cutoff
                      		'conservIdFunc' - three-set with idFunc
@@ -38,16 +38,27 @@ been implemented.
 
         	.doCrossOver 	Controls whether or not perform crossover to
                     		simplex after ipm iterations.
-                    		Default value 1.
+                    		Default value 1
                           	0 - No
                           	1 - Yes
 
         	.verbose        Controls how much information to display.
+                            Default value 2
                  	        0   - Nothing
                           	1   - Only optimal information
                           	2   - every iterations
                           	>=3 - All information
 
+```
+---------------------------------------------------------------------------
+**PIPM as normal infeasible primal-dual path-following IPM**:
+```
+        options.iPer = 0;               % No perturbations
+        options.doCrossOver = 0;        % Disable crossover to simplex
+        options.mu_cap = 1e-09;         % Push duality gap to sufficiently small
+        
+        p = pipm( A, b, c, options);
+        p.solve;
 ```
 ---------------------------------------------------------------------------
 **Example**:
