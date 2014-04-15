@@ -42,7 +42,7 @@ been implemented.
                           	0 - No
                           	1 - Yes
 
-        	.verbose = 2    Controls how much information to display.
+        	.verbose        Controls how much information to display.
                  	        0   - Nothing
                           	1   - Only optimal information
                           	2   - every iterations
