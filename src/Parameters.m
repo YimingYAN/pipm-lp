@@ -13,9 +13,9 @@ classdef Parameters < handle
                           % string, determine the strategy of actv prediction 
                           % By default it's 'conservCutoff'.
                           % 'simple' - simple cutoff
-                          % 'conservCutoff' - three-set with cutoff
-                          % 'conservIdFunc' - three-set with idFunc
-                          % 'conservIndica' - three-set with indicator
+                          % 'conservCutoff' - conservative strategy with cutoff
+                          % 'conservIdFunc' - conservative strategy idFunc
+                          % 'conservIndica' - conservative strategy indicator
                           
         doCrossOver = 1;  % Controlls whether or not perform crossover to
                           % simplex after ipm iterations. 
