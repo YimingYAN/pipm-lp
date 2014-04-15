@@ -87,7 +87,7 @@ Coralia Cartis and Yiming Yan,
 [Active-set prediction for interior point methods using controlled perturbations](http://www.maths.ed.ac.uk/~yan/research/papers/aiipm.pdf),
 submitted, April 2014
 
-
+- - -
 
 Have Fun! :)
 
