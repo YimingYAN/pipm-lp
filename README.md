@@ -25,7 +25,7 @@ The future version may also accept QP problems, but currently it has not been im
         (A,b,c) - problem data
         options - struct, optional input, controlling all parameters
         	.maxIter        Maximum number of iterations allowed
-                            Default value 30
+                            Default value 100
         	                
         	.tol            Convergence tolerance
                             Default value 1e-06
