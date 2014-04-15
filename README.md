@@ -15,26 +15,36 @@ The future version may also accept QP problems, but currently it has not been im
 ---------------------------------------------------------------------------
 **Syntax**:
 ```
-        p = pipm( A, b, c, options);
-        p.solve;
+        p = pipm( A, b, c);             p.solve;
+        p = pipm( A, b, c, options);    p.solve;
 ```
 ---------------------------------------------------------------------------
-**Input**: 
+**Input**:
+
 ```
         (A,b,c) - problem data
         options - struct, optional input, controlling all parameters
         	.maxIter        Maximum number of iterations allowed
+                            Default value 30
+        	                
         	.tol            Convergence tolerance
+                            Default value 1e-06
+        	                
         	.mu_cap         Threshold value for mu
+        	                Default value 1e-03
+        	                
         	.cutoff         Threshold value for cutoff
+        	                Default value 1e-05
+        	                
         	.iPer           Initial perturbations
-
+                            Default value 1e-02
+                                
         	.actvPredStrtgy String, determine the strategy of active-set prediction
-                     		Default value 'conservCutoff'.
+                            Default value 'conservCutoff'.
                      		'simple' - simple cutoff
-                     		'conservCutoff' - three-set with cutoff
-                     		'conservIdFunc' - three-set with idFunc
-                     		'conservIndica' - three-set with indicator
+                     		'conservCutoff' - conservative strategy with cutoff
+                     		'conservIdFunc' - conservative strategy with idFunc
+                     		'conservIndica' - conservative strategy with indicators
 
         	.doCrossOver 	Controls whether or not perform crossover to
                     		simplex after ipm iterations.
@@ -46,7 +56,7 @@ The future version may also accept QP problems, but currently it has not been im
                             Default value 2
                  	        0   - Nothing
                           	1   - Only optimal information
-                          	2   - every iterations
+                          	2   - Iterative information
                           	>=3 - All information
 
 ```
