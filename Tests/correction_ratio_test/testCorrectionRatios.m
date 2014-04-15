@@ -1,6 +1,7 @@
 function testCorrectionRatios
 % FUNCTION testCorrectionRatios
-% This function is programmed to verfy Theorem ?.? in our paper [1].
+%
+% Test scripts for figure 6.1 and 6.2 in Section 6.2.2 [1].
 %
 % -------------------------------------------------------------------------
 %
@@ -32,7 +33,8 @@ function testCorrectionRatios
 %
 % -------------------------------------------------------------------------
 %
-% [1] Active-set prediction for interior point methods using perturbations
+% [1] C. Cartis and Y. Yan, Active-set prediction for interior point methods
+%     using controlled perturbations submitted, April 2014
 %
 %
 % Date        :  22 Feb 2014
