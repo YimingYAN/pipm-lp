@@ -1,4 +1,4 @@
-PIPM: Perturbed Interior Point Methods for LP
+PIPM: Perturbed Interior Point Method for LP
 ===============================================
 
 **Description**:
