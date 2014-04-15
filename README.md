@@ -1,8 +1,8 @@
-Perturbed Interior Point Method (PIPM)
+ Perturbed Interior Point Method (PIPM)
 ===============================================
 
-An infeasible primal-dual path-following interior point method with 
-controlled perturbations for Linear Programming.
+An infeasible primal-dual path-following Interior Point Method (IPM) with 
+controlled perturbations for Linear Programming (LP). The use of controlled perturbations improves active-set prediction capabilities of IPMs for LP.
 
 The main solver PIPM (/src/pipm.m) only accepts LP problems 
 in the standard form, i,e,
@@ -41,10 +41,9 @@ The future version may also accept QP problems, but currently it has not been im
                                 
         	.actvPredStrtgy String, determine the strategy of active-set prediction
                             Default value 'conservCutoff'.
-                     		'simple' - simple cutoff
-                     		'conservCutoff' - conservative strategy with cutoff
-                     		'conservIdFunc' - conservative strategy with idFunc
-                     		'conservIndica' - conservative strategy with indicators
+                     		'conservCutoff' - cutoff
+                     		'conservIdFunc' - identification function
+                     		'conservIndica' - indicators
 
         	.doCrossOver 	Controls whether or not perform crossover to
                     		simplex after ipm iterations.
