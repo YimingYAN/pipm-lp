@@ -12,13 +12,13 @@ in the standard form, i,e,
 
 The future version may also accept QP problems, but currently it has not been implemented.
 
----------------------------------------------------------------------------
+
 **Syntax**:
 ```
         p = pipm( A, b, c);             p.solve;
         p = pipm( A, b, c, options);    p.solve;
 ```
----------------------------------------------------------------------------
+
 **Input**:
 
 ```
@@ -60,7 +60,7 @@ The future version may also accept QP problems, but currently it has not been im
                           	>=3 - All information
 
 ```
----------------------------------------------------------------------------
+
 **PIPM as normal infeasible primal-dual path-following IPM**:
 ```
         options.iPer = 0;               % No perturbations
@@ -70,29 +70,28 @@ The future version may also accept QP problems, but currently it has not been im
         p = pipm( A, b, c, options);
         p.solve;
 ```
----------------------------------------------------------------------------
+
 **Example**: 
 
 Please see examples.m in folder Examples
 
----------------------------------------------------------------------------
+
 **Author**:  
 
 Yiming Yan @ University of Edinburgh
 
----------------------------------------------------------------------------
+
 **Reference**:
 
 Coralia Cartis and Yiming Yan, 
 [Active-set prediction for interior point methods using controlled perturbations](http://www.maths.ed.ac.uk/~yan/research/papers/aiipm.pdf),
 submitted, April 2014
 
----------------------------------------------------------------------------
+
 
 Have Fun! :)
 
-Yiming Yan
-
+Yiming Yan,
 University of Edinburgh
 
 April 15, 2014
