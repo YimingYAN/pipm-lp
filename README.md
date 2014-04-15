@@ -23,13 +23,13 @@ been implemented.
 ```
         (A,b,c) - problem data
         options - struct, optional input, controlling all parameters
-        	.maxIter: Maximum number of iterations allowed
-        	.tol     Convergence tolerance
-        	.mu_cap  Threshold value for mu
-        	.cutoff  Threshold value for cutoff
-        	.iPer    Initial perturbations
+        	.maxIter        Maximum number of iterations allowed
+        	.tol            Convergence tolerance
+        	.mu_cap         Threshold value for mu
+        	.cutoff         Threshold value for cutoff
+        	.iPer           Initial perturbations
 
-        	.actvPredStrtgy string, determine the strategy of active-set prediction
+        	.actvPredStrtgy String, determine the strategy of active-set prediction
                      		By default it's 'conservCutoff'.
                      		'simple' - simple cutoff
                      		'conservCutoff' - three-set with cutoff
@@ -42,7 +42,7 @@ been implemented.
                           	0 - No
                           	1 - Yes
 
-        	.verbose = 2;   Controls how much information to display.
+        	.verbose = 2    Controls how much information to display.
                  	        0   - Nothing
                           	1   - Only optimal information
                           	2   - every iterations
