@@ -3,7 +3,7 @@
 % original problem. We are trying to answer the following questions:
 %
 % 1. Are the actual active sets the same? - if the perturbed active-set
-% obtained by ipm is not the same the orginal active-set obtianed from ipm
+% obtained by ipm is not the same as the orginal active-set obtianed from ipm
 % and the pertuebd active-set obtained from simplex is not the same  
 % as the orginal active-set obtianed from simplex either, we consider those
 % two sets are different.
