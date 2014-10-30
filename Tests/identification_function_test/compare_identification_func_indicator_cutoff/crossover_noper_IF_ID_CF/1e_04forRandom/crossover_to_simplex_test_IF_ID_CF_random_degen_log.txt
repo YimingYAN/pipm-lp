@@ -1,0 +1,257 @@
+============================== Crossover Tests ==============================
+      Prob &    m &    n &     mu_IF &     mu_ID &     mu_CF &  iter_ipm &   splx_IF &   splx_ID &   splx_CF \\ 
+  random_1 &   89 &  365 &  7.04e-05 &  7.04e-05 &  7.04e-05 &        14 &       358 &       461 &       461 \\ 
+check_solution: Variable   C3 =     -11149710.3464 is below its lower bound                  0
+check_solution: Variable   C12 =     -6457302.13548 is below its lower bound                  0
+check_solution: Variable   C14 =     -6322860.71988 is below its lower bound                  0
+check_solution: Variable   C15 =     -6291425.37502 is below its lower bound                  0
+check_solution: Variable   C21 =     -3707063.54632 is below its lower bound                  0
+check_solution: Variable   C23 =     -2097530.43583 is below its lower bound                  0
+check_solution: Variable   C33 =     -22522404.9773 is below its lower bound                  0
+check_solution: Variable   C46 =     -7888159.37078 is below its lower bound                  0
+check_solution: Variable   C48 =     -5343685.72556 is below its lower bound                  0
+check_solution: Variable   C60 =     -47022.1761755 is below its lower bound                  0
+
+Seriously low accuracy found ||*|| = 2.25224e+07 (rel. error 2.25224e+07)
+  random_2 &  173 &  347 &  8.96e-05 &  8.96e-05 &  8.96e-05 &        14 &       NaN &       738 &       738 \\ 
+  random_3 &  145 &  416 &  4.84e-05 &  4.84e-05 &  4.84e-05 &        16 &       503 &       786 &       786 \\ 
+  random_4 &   48 &  253 &  4.90e-05 &  4.90e-05 &  4.90e-05 &         9 &       127 &       177 &       177 \\ 
+  random_5 &   92 &  228 &  1.74e-05 &  1.74e-05 &  1.74e-05 &        13 &       203 &       235 &       235 \\ 
+  random_6 &   41 &  267 &  4.85e-05 &  4.85e-05 &  4.85e-05 &        10 &        88 &       153 &       153 \\ 
+  random_7 &  125 &  487 &  2.78e-05 &  2.78e-05 &  2.78e-05 &        15 &       540 &       602 &       602 \\ 
+  random_8 &  137 &  275 &  9.78e-05 &  9.78e-05 &  9.78e-05 &        16 &       324 &       658 &       658 \\ 
+  random_9 &  122 &  343 &  6.00e-05 &  6.00e-05 &  6.00e-05 &        14 &       314 &       451 &       451 \\ 
+ random_10 &   45 &  242 &  1.96e-05 &  1.96e-05 &  1.96e-05 &        10 &        88 &       172 &       172 \\ 
+ random_11 &  149 &  328 &  5.43e-05 &  5.43e-05 &  5.43e-05 &        15 &       387 &       633 &       633 \\ 
+ random_12 &   62 &  186 &  2.83e-05 &  2.83e-05 &  2.83e-05 &        12 &       161 &       261 &       261 \\ 
+ random_13 &  129 &  419 &  1.11e-05 &  1.11e-05 &  1.11e-05 &        13 &       472 &       553 &       553 \\ 
+check_solution: Variable   C1 =      -532490603877 is below its lower bound                  0
+check_solution: Variable   C2 =      -396309947544 is below its lower bound                  0
+check_solution: Variable   C4 =      -223498465095 is below its lower bound                  0
+check_solution: Variable   C6 =      -302913678002 is below its lower bound                  0
+check_solution: Variable   C16 =      -356450902121 is below its lower bound                  0
+check_solution: Variable   C29 =      -883099923112 is below its lower bound                  0
+check_solution: Variable   C34 =      -197546460820 is below its lower bound                  0
+check_solution: Variable   C35 =      -325101609938 is below its lower bound                  0
+check_solution: Variable   C40 =     -42801460689.6 is below its lower bound                  0
+check_solution: Variable   C42 =      -284327488088 is below its lower bound                  0
+
+Seriously low accuracy found ||*|| = 9.5357e+11 (rel. error 9.5357e+11)
+check_solution: Variable   C4 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C23 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C29 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C33 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C34 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C41 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C45 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C55 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C73 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C74 =             -1e+30 is below its lower bound                  0
+
+Seriously low accuracy found ||*|| = 1.69658e+31 (rel. error 1e+30)
+ random_14 &  182 &  378 &  4.97e-05 &  4.97e-05 &  4.97e-05 &        16 &       700 &       NaN &       NaN \\ 
+ random_15 &  144 &  479 &  3.92e-06 &  3.92e-06 &  3.92e-06 &        15 &       537 &       658 &       658 \\ 
+ random_16 &   50 &  118 &  6.31e-05 &  6.31e-05 &  6.31e-05 &        10 &        63 &       100 &       100 \\ 
+ random_17 &   88 &  228 &  7.31e-05 &  7.31e-05 &  7.31e-05 &        13 &       201 &       292 &       292 \\ 
+ random_18 &  162 &  402 &  7.57e-05 &  7.57e-05 &  7.57e-05 &        16 &       578 &       901 &       901 \\ 
+ random_19 &   97 &  381 &  9.89e-05 &  9.89e-05 &  9.89e-05 &        13 &       416 &       459 &       459 \\ 
+ random_20 &  138 &  406 &  6.00e-05 &  6.00e-05 &  6.00e-05 &        14 &       558 &       821 &       821 \\ 
+ random_21 &  110 &  363 &  8.10e-05 &  8.10e-05 &  8.10e-05 &        14 &       391 &       490 &       490 \\ 
+ random_22 &   42 &  205 &  8.26e-05 &  8.26e-05 &  8.26e-05 &         9 &        82 &       113 &       113 \\ 
+ random_23 &   64 &  178 &  6.72e-05 &  6.72e-05 &  6.72e-05 &        12 &       162 &       215 &       215 \\ 
+ random_24 &   51 &  179 &  3.53e-05 &  3.53e-05 &  3.53e-05 &        13 &        85 &       146 &       146 \\ 
+ random_25 &  141 &  356 &  9.26e-05 &  9.26e-05 &  9.26e-05 &        16 &       433 &       681 &       681 \\ 
+ random_26 &  170 &  374 &  6.52e-05 &  6.52e-05 &  6.52e-05 &        16 &       450 &       839 &       839 \\ 
+ random_27 &   34 &  109 &  7.73e-05 &  7.73e-05 &  7.73e-05 &        11 &        37 &       101 &       101 \\ 
+ random_28 &  159 &  336 &  8.37e-05 &  8.37e-05 &  8.37e-05 &        15 &       486 &       896 &       896 \\ 
+ random_29 &  121 &  315 &  6.40e-05 &  6.40e-05 &  6.40e-05 &        15 &       514 &       629 &       629 \\ 
+ random_30 &   50 &  314 &  9.98e-05 &  9.98e-05 &  9.98e-05 &        10 &       163 &       199 &       199 \\ 
+ random_31 &  138 &  445 &  2.80e-05 &  2.80e-05 &  2.80e-05 &        14 &       512 &       784 &       784 \\ 
+ random_32 &   69 &  430 &  4.73e-06 &  4.73e-06 &  4.73e-06 &        11 &       281 &       236 &       236 \\ 
+ random_33 &   65 &  397 &  8.52e-05 &  8.52e-05 &  8.52e-05 &        11 &       262 &       322 &       322 \\ 
+ random_34 &  176 &  395 &  9.19e-05 &  9.19e-05 &  9.19e-05 &        15 &       509 &       808 &       808 \\ 
+ random_35 &  125 &  310 &  6.89e-05 &  6.89e-05 &  6.89e-05 &        14 &       381 &       546 &       546 \\ 
+ random_36 &   42 &  201 &  8.49e-05 &  8.49e-05 &  8.49e-05 &        12 &        68 &       150 &       150 \\ 
+ random_37 &   55 &  146 &  1.51e-05 &  1.51e-05 &  1.51e-05 &        11 &        77 &       155 &       155 \\ 
+ random_38 &  110 &  281 &  4.33e-05 &  4.33e-05 &  4.33e-05 &        14 &       347 &       331 &       331 \\ 
+ random_39 &  105 &  372 &  8.76e-05 &  8.76e-05 &  8.76e-05 &        13 &       314 &       481 &       481 \\ 
+ random_40 &  149 &  421 &  6.45e-05 &  6.45e-05 &  6.45e-05 &        15 &       612 &       822 &       822 \\ 
+ random_41 &   77 &  216 &  5.87e-05 &  5.87e-05 &  5.87e-05 &        11 &       228 &       307 &       307 \\ 
+ random_42 &   29 &  164 &  2.58e-05 &  2.58e-05 &  2.58e-05 &         9 &        59 &        79 &        79 \\ 
+ random_43 &   98 &  479 &  5.09e-05 &  5.09e-05 &  5.09e-05 &        14 &       318 &       596 &       596 \\ 
+ random_44 &   72 &  200 &  2.42e-05 &  2.42e-05 &  2.42e-05 &        12 &       179 &       230 &       230 \\ 
+ random_45 &  147 &  461 &  6.73e-05 &  6.73e-05 &  6.73e-05 &        16 &       709 &       869 &       869 \\ 
+ random_46 &   57 &  389 &  7.02e-06 &  7.02e-06 &  7.02e-06 &        11 &       129 &       224 &       273 \\ 
+ random_47 &  108 &  457 &  7.22e-05 &  7.22e-05 &  7.22e-05 &        12 &       432 &       507 &       507 \\ 
+ random_48 &   85 &  193 &  4.26e-05 &  4.26e-05 &  4.26e-05 &        13 &       225 &       252 &       252 \\ 
+ random_49 &  162 &  360 &  5.78e-05 &  5.78e-05 &  5.78e-05 &        15 &       505 &      1005 &      1005 \\ 
+ random_50 &   82 &  302 &  9.30e-05 &  9.30e-05 &  9.30e-05 &        13 &       290 &       338 &       338 \\ 
+ random_51 &  137 &  484 &  4.90e-05 &  4.90e-05 &  4.90e-05 &        13 &       654 &       832 &       832 \\ 
+ random_52 &  129 &  435 &  5.40e-05 &  5.40e-05 &  5.40e-05 &        14 &       477 &       675 &       675 \\ 
+ random_53 &  153 &  411 &  8.54e-05 &  8.54e-05 &  8.54e-05 &        16 &       407 &       724 &       724 \\ 
+ random_54 &   36 &   97 &  1.62e-05 &  1.62e-05 &  1.62e-05 &        11 &        37 &        64 &        64 \\ 
+check_solution: Variable   C7 = -1.19921690611e+22 is below its lower bound                  0
+check_solution: Variable   C8 = -1.41807280377e+22 is below its lower bound                  0
+check_solution: Variable   C9 =  -1.1278707301e+22 is below its lower bound                  0
+check_solution: Variable   C10 = -2.50825515866e+21 is below its lower bound                  0
+check_solution: Variable   C18 = -4.00432098535e+21 is below its lower bound                  0
+check_solution: Variable   C23 = -5.27315319511e+21 is below its lower bound                  0
+check_solution: Variable   C28 = -1.26203469843e+22 is below its lower bound                  0
+check_solution: Variable   C30 = -4.43676788273e+21 is below its lower bound                  0
+check_solution: Variable   C31 = -7.51299970362e+21 is below its lower bound                  0
+check_solution: Variable   C35 = -9.55010583497e+21 is below its lower bound                  0
+
+Seriously low accuracy found ||*|| = 2.58766e+22 (rel. error 2.58766e+22)
+ random_55 &  174 &  353 &  9.34e-05 &  9.34e-05 &  9.34e-05 &        15 &       NaN &       763 &       914 \\ 
+ random_56 &  114 &  270 &  8.92e-05 &  8.92e-05 &  8.92e-05 &        15 &       377 &       418 &       418 \\ 
+ random_57 &  108 &  471 &  3.72e-05 &  3.72e-05 &  3.72e-05 &        14 &       393 &       614 &       614 \\ 
+ random_58 &   67 &  135 &  4.00e-05 &  4.00e-05 &  4.00e-05 &        11 &        98 &       130 &       130 \\ 
+check_solution: Variable   C1 =     -205734294.814 is below its lower bound                  0
+check_solution: Variable   C2 =     -124985058.983 is below its lower bound                  0
+check_solution: Variable   C8 =     -10210096.5354 is below its lower bound                  0
+check_solution: Variable   C14 =     -198130031.187 is below its lower bound                  0
+check_solution: Variable   C27 =     -172874266.847 is below its lower bound                  0
+check_solution: Variable   C28 =     -289634538.585 is below its lower bound                  0
+check_solution: Variable   C29 =     -113898643.049 is below its lower bound                  0
+check_solution: Variable   C33 =     -194028240.693 is below its lower bound                  0
+check_solution: Variable   C43 =     -256656365.384 is below its lower bound                  0
+check_solution: Variable   C48 =     -116851018.831 is below its lower bound                  0
+
+Seriously low accuracy found ||*|| = 2.89635e+08 (rel. error 2.89635e+08)
+check_solution: Variable   C1 = -2.25958258876e+19 is below its lower bound                  0
+check_solution: Variable   C11 = -1.49819052926e+19 is below its lower bound                  0
+check_solution: Variable   C17 = -2.71079972437e+19 is below its lower bound                  0
+check_solution: Variable   C43 = -2.86306924649e+18 is below its lower bound                  0
+check_solution: Variable   C44 = -9.04947394319e+18 is below its lower bound                  0
+check_solution: Variable   C58 = -2.28484500968e+19 is below its lower bound                  0
+check_solution: Variable   C60 =  -2.0427351635e+19 is below its lower bound                  0
+check_solution: Variable   C63 = -2.79675803714e+19 is below its lower bound                  0
+check_solution: Variable   C69 = -2.30682229223e+19 is below its lower bound                  0
+check_solution: Variable   C71 = -1.60085787507e+19 is below its lower bound                  0
+
+Seriously low accuracy found ||*|| = 6.84407e+19 (rel. error 6.84407e+19)
+ random_59 &   99 &  222 &  6.87e-05 &  6.87e-05 &  6.87e-05 &        13 &       217 &       NaN &       NaN \\ 
+ random_60 &   39 &  175 &  8.43e-05 &  8.43e-05 &  8.43e-05 &         9 &        92 &       114 &       114 \\ 
+ random_61 &   93 &  207 &  5.59e-05 &  5.59e-05 &  5.59e-05 &        14 &       165 &       309 &       309 \\ 
+ random_62 &  108 &  329 &  7.54e-05 &  7.54e-05 &  7.54e-05 &        14 &       317 &       435 &       435 \\ 
+ random_63 &  121 &  423 &  9.47e-05 &  9.47e-05 &  9.47e-05 &        16 &       556 &       578 &       578 \\ 
+ random_64 &   56 &  287 &  9.14e-06 &  9.14e-06 &  9.14e-06 &         9 &       161 &       130 &       204 \\ 
+ random_65 &  120 &  306 &  2.36e-05 &  2.36e-05 &  2.36e-05 &        14 &       202 &       512 &       512 \\ 
+ random_66 &   77 &  335 &  6.47e-05 &  6.47e-05 &  6.47e-05 &        13 &       281 &       290 &       386 \\ 
+ random_67 &  105 &  239 &  7.82e-05 &  7.82e-05 &  7.82e-05 &        13 &       213 &       408 &       408 \\ 
+ random_68 &   15 &   72 &  3.54e-05 &  3.54e-05 &  3.54e-05 &         8 &        14 &        24 &        24 \\ 
+ random_69 &  147 &  385 &  5.12e-05 &  5.12e-05 &  5.12e-05 &        15 &       701 &       826 &       826 \\ 
+ random_70 &  144 &  414 &  5.87e-05 &  5.87e-05 &  5.87e-05 &        16 &       481 &       782 &       782 \\ 
+ random_71 &   87 &  491 &  4.12e-05 &  4.12e-05 &  4.12e-05 &        12 &       413 &       421 &       421 \\ 
+ random_72 &   11 &   29 &  5.67e-05 &  5.67e-05 &  5.67e-05 &         8 &         9 &         7 &        10 \\ 
+ random_73 &   61 &  141 &  6.32e-05 &  6.32e-05 &  6.32e-05 &        13 &       120 &       194 &       194 \\ 
+ random_74 &  116 &  331 &  1.61e-05 &  1.61e-05 &  1.61e-05 &        14 &       402 &       470 &       470 \\ 
+ random_75 &  149 &  473 &  3.61e-05 &  3.61e-05 &  3.61e-05 &        15 &       674 &       967 &       967 \\ 
+ random_76 &   30 &  163 &  1.95e-05 &  1.95e-05 &  1.95e-05 &        10 &        49 &       113 &       113 \\ 
+ random_77 &  156 &  453 &  6.77e-05 &  6.77e-05 &  6.77e-05 &        14 &       610 &       881 &       881 \\ 
+ random_78 &   58 &  258 &  3.47e-05 &  3.47e-05 &  3.47e-05 &        11 &       165 &       251 &       247 \\ 
+ random_79 &   78 &  196 &  3.38e-05 &  3.38e-05 &  3.38e-05 &        15 &       112 &       240 &       240 \\ 
+ random_80 &  118 &  280 &  5.79e-05 &  5.79e-05 &  5.79e-05 &        14 &       483 &       383 &       383 \\ 
+ random_81 &   85 &  364 &  9.26e-06 &  9.26e-06 &  9.26e-06 &        12 &       259 &       323 &       323 \\ 
+ random_82 &  164 &  466 &  1.06e-05 &  1.06e-05 &  1.06e-05 &        16 &       507 &       768 &       768 \\ 
+ random_83 &  145 &  495 &  8.72e-05 &  8.72e-05 &  8.72e-05 &        13 &       780 &       774 &       774 \\ 
+ random_84 &   35 &  131 &  1.30e-05 &  1.30e-05 &  1.30e-05 &         8 &        34 &        51 &        85 \\ 
+ random_85 &   61 &  337 &  2.19e-05 &  2.19e-05 &  2.19e-05 &         9 &       132 &       125 &       251 \\ 
+ random_86 &   77 &  486 &  2.03e-05 &  2.03e-05 &  2.03e-05 &        10 &       302 &       375 &       375 \\ 
+ random_87 &   52 &  185 &  2.31e-05 &  2.31e-05 &  2.31e-05 &         9 &        89 &       142 &       142 \\ 
+ random_88 &  176 &  416 &  6.73e-05 &  6.73e-05 &  6.73e-05 &        15 &       879 &      1098 &      1098 \\ 
+ random_89 &  133 &  492 &  8.66e-06 &  8.66e-06 &  8.66e-06 &        16 &       577 &       625 &       625 \\ 
+ random_90 &   25 &  107 &  1.13e-05 &  1.13e-05 &  1.13e-05 &        11 &        15 &        79 &        79 \\ 
+ random_91 &   87 &  279 &  4.97e-05 &  4.97e-05 &  4.97e-05 &        14 &       170 &       362 &       362 \\ 
+ random_92 &   84 &  441 &  7.95e-05 &  7.95e-05 &  7.95e-05 &        11 &       333 &       532 &       532 \\ 
+check_solution: Variable   C5 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C21 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C26 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C27 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C32 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C34 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C36 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C42 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C43 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C52 =             -1e+30 is below its lower bound                  0
+
+Seriously low accuracy found ||*|| = 1.66379e+31 (rel. error 1e+30)
+check_solution: Variable   C7 = -2.61559831941e+19 is below its lower bound                  0
+check_solution: Variable   C11 = -1.99685749124e+19 is below its lower bound                  0
+check_solution: Variable   C13 = -1.01367309792e+19 is below its lower bound                  0
+check_solution: Variable   C21 = -4.14067363881e+19 is below its lower bound                  0
+check_solution: Variable   C28 = -2.10749553815e+19 is below its lower bound                  0
+check_solution: Variable   C35 = -4.36632139678e+19 is below its lower bound                  0
+check_solution: Variable   C42 =  -1.8499724542e+19 is below its lower bound                  0
+check_solution: Variable   C48 = -5.00723089127e+19 is below its lower bound                  0
+check_solution: Variable   C50 = -2.38613907169e+18 is below its lower bound                  0
+check_solution: Variable   C56 = -5.76325162319e+17 is below its lower bound                  0
+
+Seriously low accuracy found ||*|| = 1.05038e+20 (rel. error 1.05038e+20)
+check_solution: Variable   C5 =     -83046491826.2 is below its lower bound                  0
+check_solution: Variable   C7 =      -459301864788 is below its lower bound                  0
+check_solution: Variable   C20 =      -104413066842 is below its lower bound                  0
+check_solution: Variable   C21 =      -437659342673 is below its lower bound                  0
+check_solution: Variable   C22 =      -227548335743 is below its lower bound                  0
+check_solution: Variable   C34 =      -716120386656 is below its lower bound                  0
+check_solution: Variable   C35 =      -709029169193 is below its lower bound                  0
+check_solution: Variable   C50 =      -144312168388 is below its lower bound                  0
+check_solution: Variable   C58 = -1.14507216313e+12 is below its lower bound                  0
+check_solution: Variable   C60 =      -514078387143 is below its lower bound                  0
+
+Seriously low accuracy found ||*|| = 1.87189e+12 (rel. error 1.87189e+12)
+ random_93 &  184 &  445 &  7.54e-05 &  7.54e-05 &  7.54e-05 &        16 &       NaN &       NaN &       NaN \\ 
+ random_94 &  127 &  347 &  4.91e-05 &  4.91e-05 &  4.91e-05 &        14 &       297 &       541 &       541 \\ 
+ random_95 &   74 &  213 &  5.12e-05 &  5.12e-05 &  5.12e-05 &        10 &       111 &       196 &       196 \\ 
+ random_96 &  179 &  391 &  7.15e-05 &  7.15e-05 &  7.15e-05 &        16 &       572 &       845 &       845 \\ 
+ random_97 &  197 &  411 &  7.63e-05 &  7.63e-05 &  7.63e-05 &        17 &       662 &      1070 &      1070 \\ 
+ random_98 &  164 &  366 &  5.61e-05 &  5.61e-05 &  5.61e-05 &        17 &       744 &       687 &       687 \\ 
+check_solution: Variable   C2 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C12 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C13 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C16 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C22 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C23 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C24 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C40 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C53 =             -1e+30 is below its lower bound                  0
+check_solution: Variable   C64 =             -1e+30 is below its lower bound                  0
+
+Seriously low accuracy found ||*|| = 1.9497e+31 (rel. error 1e+30)
+check_solution: Variable   C1 =     -2219407.70823 is below its lower bound                  0
+check_solution: Variable   C8 =     -6824306.75429 is below its lower bound                  0
+check_solution: Variable   C14 =     -8668769.30059 is below its lower bound                  0
+check_solution: Variable   C16 =     -5471728.84222 is below its lower bound                  0
+check_solution: Variable   C18 =     -7339862.22707 is below its lower bound                  0
+check_solution: Variable   C22 =     -4034043.79295 is below its lower bound                  0
+check_solution: Variable   C27 =     -11231458.1053 is below its lower bound                  0
+check_solution: Variable   C29 =     -4990395.14646 is below its lower bound                  0
+check_solution: Variable   C30 =     -3137100.30646 is below its lower bound                  0
+check_solution: Variable   C32 =     -3052679.00033 is below its lower bound                  0
+
+Seriously low accuracy found ||*|| = 1.25608e+07 (rel. error 1.25608e+07)
+check_solution: Variable   C9 = -2.04956739151e+25 is below its lower bound                  0
+check_solution: Variable   C16 = -1.94613102663e+25 is below its lower bound                  0
+check_solution: Variable   C19 = -2.22101228096e+24 is below its lower bound                  0
+check_solution: Variable   C22 = -3.19854118478e+24 is below its lower bound                  0
+check_solution: Variable   C34 = -1.70476403212e+24 is below its lower bound                  0
+check_solution: Variable   C42 = -1.85762178586e+25 is below its lower bound                  0
+check_solution: Variable   C43 =   -3.363697443e+25 is below its lower bound                  0
+check_solution: Variable   C48 =  -3.5931970435e+25 is below its lower bound                  0
+check_solution: Variable   C53 = -4.81941470858e+24 is below its lower bound                  0
+check_solution: Variable   C57 = -2.38368843683e+24 is below its lower bound                  0
+
+Seriously low accuracy found ||*|| = 4.2558e+25 (rel. error 4.2558e+25)
+ random_99 &  159 &  381 &  9.21e-05 &  9.21e-05 &  9.21e-05 &        15 &       NaN &       NaN &       NaN \\ 
+random_100 &  119 &  484 &  8.69e-05 &  8.69e-05 &  8.69e-05 &        14 &       402 &       554 &       554 \\ 
+---------------------------------------------------------------------
+  Average: &      &      &  5.42e-05 &  5.42e-05 &  5.42e-05 &        13 &       329 &       460 &       466
+
+============================ Performance Profile ============================
+
+# of Probs removed: 4
+Problems removed: 
+random_14
+random_59
+random_93
+random_99
