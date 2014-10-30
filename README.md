@@ -4,8 +4,10 @@
 An infeasible primal-dual path-following Interior Point Method (IPM) with 
 controlled perturbations for Linear Programming (LP). The use of controlled perturbations improves active-set prediction capabilities of IPMs for LP.
 
-**First**
-Remember to add the /path/to/thirdParty/lp_solve/src to LD_LIBRARY_PATH!!!
+**!!!Before Start!!!**
+In Unix, add the /path/to/thirdParty/lp_solve/src to LD_LIBRARY_PATH
+In Windows, add the \path\to\thirdParty\lp_solve\bin\win64 to system environment variable PATH
+
 
 The main solver PIPM (/src/pipm.m) only accepts LP problems 
 in the standard form, i,e,
