@@ -11,8 +11,11 @@ function setup()
 fprintf('[1] Checking OS... \n');
 os = check_os;
 
-if os ~= 1 && os ~= 2
-    fprintf('    !! Tested only for 32/64bit Matlab under Linux !!\n');
+if os ~= 1 || os ~= 2 || os ~= 3
+    fprintf('    !! Only works for the following platforms: \n');
+    fprintf('    1. 32bit Unix \n');
+    fprintf('    2. 64bit Unix \n');
+    fprintf('    3. 64bit Win PC\n');
 end
 
 if os == 5
@@ -33,14 +36,14 @@ if os ~= 5
 end
 addpath( genpath( [currentLocation '/Tests'] ) );
 
-reply = input('    Would like to save the paths? - (Y/N): ','s');
-if strcmpi(reply,'y') || strcmpi(reply,'yes')
-    try
-        savepath;
-    catch % may not work
-        warning('PIPM Setup: Cannot save paths. You may not have admin rights')
-    end
-end
+% reply = input('    Would like to save the paths? - (Y/N): ','s');
+% if strcmpi(reply,'y') || strcmpi(reply,'yes')
+%     try
+%         savepath;
+%     catch % may not work
+%         warning('PIPM Setup: Cannot save paths. You may not have admin rights')
+%     end
+% end
 
 fprintf('Done. \n')
 
