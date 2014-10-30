@@ -33,14 +33,14 @@ if os ~= 5
 end
 addpath( genpath( [currentLocation '/Tests'] ) );
 
-reply = input('    Would like to save the paths? - (Y/N): ','s');
-if strcmpi(reply,'y') || strcmpi(reply,'yes')
-    try
-        savepath;
-    catch % may not work
-        warning('PIPM Setup: Cannot save paths. You may not have admin rights')
-    end
-end
+% reply = input('    Would like to save the paths? - (Y/N): ','s');
+% if strcmpi(reply,'y') || strcmpi(reply,'yes')
+%     try
+%         savepath;
+%     catch % may not work
+%         warning('PIPM Setup: Cannot save paths. You may not have admin rights')
+%     end
+% end
 
 fprintf('Done. \n')
 
