@@ -36,7 +36,7 @@ classdef Iterate < handle
     methods
         % Constructor
         function iter = Iterate(prob)
-            iter.bc = 1+max([norm(prob.b), normb(prob.c)]);
+            iter.bc = 1+max([norm(prob.b), norm(prob.c)]);
         end
         
         function calculateResiduals(iter, prob, perturbations)
