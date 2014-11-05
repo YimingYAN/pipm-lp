@@ -33,3 +33,6 @@ end
 prob2test = textscan(fid, '%s', 'Delimiter','','EndOfLine', '\n');
 fclose(fid);
 prob2test = prob2test{1};
+for i = 1:length(prob2test)
+    prob2test{i} = strtrim(prob2test{i});
+end
