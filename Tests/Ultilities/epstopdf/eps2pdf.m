@@ -17,7 +17,7 @@ function [result,msg] = eps2pdf(epsFile,fullGsPath,orientation)
 %                       0 -> no change (default)
 %                       1 -> flip orientation
 %                       2 -> remove orientation
-%   
+%
 %   - result:       0 if ok, anything else otherwise
 %   - msg:          resulting status on file being processed
 %
@@ -31,7 +31,7 @@ function [result,msg] = eps2pdf(epsFile,fullGsPath,orientation)
 %   is determined by the bounding box and not by the paper size. This can not be
 %   accomplished by using Ghostscript only. So, all that one needs is of course
 %   Matlab and Ghostscript drivers.
-% 
+%
 %   This tool is especially suited for LaTeX (TeX) users who want to create pdf
 %   documents on the fly (by including pdf graphics and using either pdftex or
 %   pdflatex). An example would be, if you are using LaTeX (TeX) to typeset
@@ -60,13 +60,16 @@ function [result,msg] = eps2pdf(epsFile,fullGsPath,orientation)
 global epsFileContent
 
 if ispc
-    DEF_GS_PATH = 'gswin32c.exe';
+    [isExist, DEF_GS_PATH] = findGSPath();
+    if ~isExist
+        error('EPSTOPDF: gs not found.');
+    end
 else
     DEF_GS_PATH = 'gs';
 end
 GS_PARAMETERS = '-q -dNOPAUSE -dBATCH -dDOINTERPOLATE -dUseFlateCompression=true -sDEVICE=pdfwrite -r1200';
 
-error(nargchk(1,3,nargin));
+narginchk(1,3);
 if nargin < 2 || isempty(fullGsPath)
     fullGsPath = DEF_GS_PATH;
 else
@@ -118,17 +121,19 @@ else
     if stat
         status = ['pdf file not created - error running Ghostscript - check GS path: ' result];
         if nargout,      result = 1;    end;
-        if nargout > 1,  msg = status;  else, disp(status);  end;  
+        if nargout > 1,  msg = status;  else, disp(status);  end;
     else
-        status = 'pdf successfully created'; 
+        status = 'pdf successfully created';
         if nargout,      result = 0;    end;
-        if nargout > 1,  msg = status;  else, disp(status);  end; 
+        if nargout > 1,  msg = status;  else, disp(status);  end;
     end
 end
 
 % Delete tmp file
 if exist(tmpFile)
     delete(tmpFile);
+end
+
 end
 
 
@@ -141,6 +146,18 @@ end
 %/////////////////////////////////////////////////////////////////////
 
 %--------------------------------------------------------------------
+function [isExist, DEF_GS_PATH] = findGSPath()
+arch = computer('arch');
+switch arch
+    case 'win64'
+        [isExist,DEF_GS_PATH] = system('where gswin64c.exe');
+    case 'win32'
+        [isExist,DEF_GS_PATH] = system('where gswin32c.exe');
+end
+
+end
+%--------------------------------------------------------------------
+
 function [ok,errStr] = create_tmpepsfile(epsFile,tmpFile,orientation)
 % Creates tmp eps file - file with refined content
 global epsFileContent
@@ -167,6 +184,7 @@ catch
     errStr = ['Error writing temporary file. Check write permissions.'];
 end
 fclose(fh);
+end
 %--------------------------------------------------------------------
 
 
@@ -189,6 +207,7 @@ catch
     errStr = lasterror;
 end
 fclose(fh);
+end
 %--------------------------------------------------------------------
 
 
@@ -241,8 +260,8 @@ if orientation ~= 0
                 orientStr = 'Portrait';
             elseif strfind(lower(orientStr),'portrait')
                 changeOrientation = 1;
-                orientStr = 'Landscape';                
-            end            
+                orientStr = 'Landscape';
+            end
         elseif  ~isempty(orientStr) & orientation == 2      % remove
             if strfind(lower(orientStr),'landscape') | strfind(lower(orientStr),'portrait')
                 changeOrientation = 1;
@@ -255,8 +274,8 @@ end
 % Refine the content - add additional information and even change the
 % orientation
 addBBContent = [' 0 0 ' int2str(w) ' ' int2str(h) ' ' NL...
-                    '<< /PageSize [' int2str(w) ' ' int2str(h) '] >> setpagedevice' NL...
-                    'gsave ' int2str(-coords(1)) ' ' int2str(-coords(2)) ' translate'];
+    '<< /PageSize [' int2str(w) ' ' int2str(h) '] >> setpagedevice' NL...
+    'gsave ' int2str(-coords(1)) ' ' int2str(-coords(2)) ' translate'];
 if changeOrientation
     if fromOR > fromBB
         epsFileContent = [epsFileContent(1:fromBB-1) addBBContent epsFileContent(toBB+1:fromOR-1) orientStr epsFileContent(toOR+1:end)];
@@ -268,6 +287,7 @@ else
 end
 
 ok = 1;
+end
 %--------------------------------------------------------------------
 
 %--------------------------------------------------------------------
@@ -290,6 +310,7 @@ elseif epsFileContent(ii)==sprintf('\r')
     end
 end
 NL = sprintf(NL);
+end
 %--------------------------------------------------------------------
 
 
@@ -301,10 +322,11 @@ if isnumeric(str);
     outstr = str;
     return
 end
-ind = find( ~isspace(str) );        % indices of the non-space characters in the str    
+ind = find( ~isspace(str) );        % indices of the non-space characters in the str
 if isempty(ind)
-    outstr = [];        
+    outstr = [];
 else
     outstr = str( ind(1):ind(end) );
+end
 end
 %--------------------------------------------------------------------

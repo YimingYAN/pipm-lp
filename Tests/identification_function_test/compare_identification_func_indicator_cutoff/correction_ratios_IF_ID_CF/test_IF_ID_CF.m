@@ -13,7 +13,7 @@ if nargin < 1
     fprintf('1. Pls choose the test set [1-2]: \n');
     fprintf('\t [1]. Random test (primal nondegenerate)\n');
     fprintf('\t [2]. Random test (primal-dual degenerate)\n');
-    fprintf('\t [3]. 6 netlib problems\n')
+    %fprintf('\t [3]. 6 netlib problems\n')
     usrinput_type = input('Your choice here [1-2]: ');
     
     if usrinput_type == 1
@@ -50,6 +50,7 @@ params_ID.actvPredStrtgy   = 'conservindica';
 % Cutoff
 params_CF = params_IF;
 params_CF.actvPredStrtgy   = 'conservcutoff';
+params_CF.cutoff = 1e-02;
 
 % Options for plots
 Legends = { 'Identification function'  'Indicators'  'Cut-off' };
