@@ -16,7 +16,7 @@
 %   - if the number of the non-zero components are greater thatn m, we
 %   consider it as nondegenerate.
 %
-% 4. Is it true that when the perturbation are small enough perturbed
+% 4. Is it true that when the perturbations are small enough perturbed
 % problems have the same active-set as the original problem?
 %
 % Date  : 23 Feb 2014
@@ -37,13 +37,10 @@ elseif randomTest == 2
 end
 
 %% Threshold
-% C = [1e-06 1e-05 1e-04];
 C = 1e-05;
 K = [0 10 18];
 % the second number is chosen by having largest gap between pac and oac
 numTestProb = 10;
-
-% C = 1e-05
 
 if exist(logName, 'file')
     delete(logName);
