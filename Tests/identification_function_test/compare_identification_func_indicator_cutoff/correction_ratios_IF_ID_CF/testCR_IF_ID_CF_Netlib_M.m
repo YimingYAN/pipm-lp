@@ -64,9 +64,9 @@ fprintf('\n================================= Correction Ratio Tests ============
 
 i = 1;
 
-fprintf('Progress: |');
+fprintf('Progress: \n');
 while i <= numTestProb
-    fprintf('--> %d',i);
+    fprintf('| --> %d',i);
     
     load(prob2test{i});
     [A,b,c,FEASIBLE]=myPreprocess(A,b,c,lbounds,ubounds,BIG);
@@ -85,19 +85,13 @@ while i <= numTestProb
     end
     
     % Determine range
+    params.maxIter = 100;
     p = pipm(A,b,c,params); p.solve;
     stopAtRangeU = p.getIPMIterCount;
     stopAtRangeL = stopAtRangeU - steps + 1;
     
     counter = 1;      % Counter for outter loop
-    
-    falsePrediction  = zeros(stopAtRangeU - stopAtRangeL,3);
-    missedPrediction = falsePrediction;
-    correctionR      = falsePrediction;
-    Residual         = falsePrediction;
-    
-    skipped = 0;
-    
+    skipped = 0; 
     for k = stopAtRangeL:1:stopAtRangeU
         
         %% Predict the actv - IF
@@ -125,27 +119,22 @@ while i <= numTestProb
         [fpr_CF(counter, i), mpr_CF(counter, i), cr_CF(counter, i)] = ...
             getCorrectionRatio(p_CF.getActv, actualActv);
         
-        res_IF(counter, i) = p_IF.getIPMResidual;
-        res_ID(counter, i) = p_ID.getIPMResidual;
-        res_CF(counter, i) = p_CF.getIPMResidual;
+        res_IF(counter, i) = p_IF.getIPMResidual
+        res_ID(counter, i) = p_ID.getIPMResidual
+        res_CF(counter, i) = p_CF.getIPMResidual
         
         counter = counter+1;
     end
-    
-    fprintf(' |');
+    fprintf(' |\n');
     %% Increment the counter
     i = i+1;
-    
 end
 
-fprintf('\n');
-
 %% Get the matrix
-falsePrediction  = [ mean(fpr_IF,2)  mean(fpr_ID,2) mean(fpr_CF,2)]
-missedPrediction = [ mean(mpr_IF,2)  mean(mpr_ID,2) mean(mpr_CF,2)]
-correctionR     = [ mean(cr_IF,2)   mean(cr_ID,2)  mean(cr_CF,2) ]
-
-Residual         = [ mean(res_IF,2) mean(res_ID,2) mean(res_CF,2) ]
+falsePrediction  = [ mean(fpr_IF,2)  mean(fpr_ID,2) mean(fpr_CF,2)];
+missedPrediction = [ mean(mpr_IF,2)  mean(mpr_ID,2) mean(mpr_CF,2)];
+correctionR      = [ mean(cr_IF,2)   mean(cr_ID,2)  mean(cr_CF,2) ];
+Residual         = [ mean(res_IF,2)  mean(res_ID,2) mean(res_CF,2)];
 
 fprintf('\n\tTotal number of probs skipped: %d\n', skipped);
 
@@ -158,10 +147,9 @@ range = 1 : steps;
 
 save( [fileName '.mat'] );
 
- plotCorrectionRatios_3lines(falsePrediction, missedPrediction,...
-     correctionR, Residual, range, Legends, fileName,...
-     colors, lineStyles, markers);
-
+plotCorrectionRatios_3lines(falsePrediction, missedPrediction,...
+    correctionR, Residual, range, Legends, fileName,...
+    colors, lineStyles, markers);
 
 fprintf('DONE.\n');
 fprintf('Pls check the file %s for the plot.\n', [fileName '.pdf']);
@@ -169,27 +157,6 @@ diary off;
 end
 
 %% Print iterative info
-function printHeader
-fprintf('\n%4s | %11s | %7s %7s %7s %9s | %7s %7s %7s %9s | %7s %7s %7s %9s\n',...
-    'Iter', '[m,n]  ',...
-    'F_IF', 'M_IF', 'C_IF', 'R_IF',...
-    'F_ID', 'M_ID', 'C_ID', 'R_ID',...
-    'F__CF', 'M__CF', 'C__CF', 'R__CF');
-end
-
-function printContent(k, counter, Avgm, Avgn, falsePrediction,...
-    missedPrediction, correctionR, Residual)
-fprintf('%4d | [%4d %4d] | %7.2f %7.2f %7.2f %9.2e | %7.2f %7.2f %7.2f %9.2e | %7.2f %7.2f %7.2f %9.2e\n',...
-    k,Avgm,Avgn,...
-    falsePrediction(counter, 1), missedPrediction(counter, 1), ...
-    correctionR(counter, 1),      Residual(counter, 1), ...
-    falsePrediction(counter, 2), missedPrediction(counter, 2), ...
-    correctionR(counter, 2),      Residual(counter, 2),...
-    falsePrediction(counter, 3), missedPrediction(counter, 3), ...
-    correctionR(counter, 3),      Residual(counter, 3));
-
-end
-
 function plotCorrectionRatios_3lines(falsePrediction, missedPrediction,...
     correctionR, Residual, range, Legends, fileName,...
     colors, lineStyles, markers)

@@ -116,13 +116,13 @@ for k=stopAtRangeL:1:stopAtRangeU
         [m, n] = size(A);
         
         %  Get the actual original actv from linprog (simplex) 
-        [ actualActv_splx,   exitflag_per ] = solveLinprog(A, b, c,'splx');
+        [ actualActv_splx,   exitflag_splx ] = solveLinprog(A, b, c,'splx');
         
         %  Get the actual original actv from linprog (ipm)
-        [ actualActv_ipm, exitflag_unper  ] = solveLinprog(A, b, c,'ipm' );
+        [ actualActv_ipm, exitflag_ipm  ] = solveLinprog(A, b, c,'ipm' );
         
         % Skip the test problem if linprog does not converge
-        if exitflag_per ~= 1 || exitflag_unper ~= 1
+        if exitflag_splx ~= 1 || exitflag_ipm ~= 1
             skipped = skipped + 1;
             continue;
         end

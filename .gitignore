@@ -2,3 +2,8 @@
 .DS_Store
 *.orig
 *.asv
+*.mat
+*.pdf
+*.eps
+*_log.txt
+*.log
