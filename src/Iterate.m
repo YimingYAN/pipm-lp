@@ -57,13 +57,11 @@ classdef Iterate < handle
             % Check mu cap
             if iter.mu < parameters.mu_cap
                 termination = 1;
-                status.updateExtflg_IPM('terminatedByMu_cap');
-            end
-                
-            % Check residual
-            if ~isempty(iter.residual) && iter.residual < parameters.tol
-                termination = 1;
-                status.updateExtflg_IPM('terminatedByRelResidual');
+               % Check residual
+               if ~isempty(iter.residual) && iter.residual < parameters.tol
+                   status.updateExtflg_IPM('terminatedByRelResidual');
+               end
+               status.updateExtflg_IPM('terminatedByMu_cap');
             end
             
             % Check maxIter
@@ -73,7 +71,6 @@ classdef Iterate < handle
             end
         end
     
-        
         function nextIter(iter, newton, prob)
             % nextIter - Gets next iterates. 
             % Run this function after get Newton direction and step size.
@@ -82,7 +79,6 @@ classdef Iterate < handle
             prob.update_s( prob.s + iter.alphas*newton.ds );
             prob.update_y( prob.y + iter.alphas*newton.dy );
         end
-            
         
         function stepSize(iter, prob, parameters, perturbations, newton)
         % stepSize - Calculates stepsize
@@ -106,7 +102,6 @@ classdef Iterate < handle
         % For reference, please refer to "On the Implementation of a Primal-Dual
         % Interior Point Method" by Sanjay Mehrotra.
             
-            
             e = ones(prob.n,1);
             
             % solution for min norm(s) s.t. A'*y + s = c
@@ -129,7 +124,6 @@ classdef Iterate < handle
             prob.update_x(x+delta_x_c*e);
             prob.update_s(s+delta_s_c*e);
             prob.update_y(y);
-        end
-        
+        end 
     end    
 end % classdef
