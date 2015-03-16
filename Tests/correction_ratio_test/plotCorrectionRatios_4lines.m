@@ -1,15 +1,18 @@
 %% Function used to calculate the correction ratios - 4 lines
 function plotCorrectionRatios_4lines(falsePrediction, missedPrediction,...
-    correctionR, avgResidual, range, Legends, fileName, colors, lineStyles, markers)
+    correctionR, avgResidual, range, Legends, fileName, colors,...
+    lineStyles, markers, isNetlib)
 % PLOTCORRECTIONRATIOS This function plots the prediction ratios, including 
 % false prediction, missed prediction and correction ratios.
 %
 % Date  : 22 Feb 2014
 % Author: Yiming Yan
 
-
 clf;
 
+if nargin < 11
+    isNetlib = 0;
+end
 titles = {'False Prediction Ratio',...
     'Missed Prediction Ratio',...
     'Correction Ratio',...
@@ -35,13 +38,21 @@ for i = 1: 4
             %'MarkerFaceColor', colors{j})
     end
     hold off
-    
     title(titles{i});
-    
 end
 
 % Set axes properties
 set(h,'XTick',range);
+if isNetlib
+    for i = 1:length(range)
+        if i ~= 1
+            tickLabel{length(range) - i + 1} = ['M-' num2str(range(i)) - 1];
+        else
+            tickLabel{length(range) - i + 1} = ['M'];
+        end
+    end
+    set(h,'XTickLabel', tickLabel);
+end
 set(h,'XLim',[range(1) range(end)+0.1]);
 set(h(1:3),'YLim',[-0.1 1.1]);
 set(h(4), 'YLim',[floor(min(min(log10(avgResidual)))) ceil(max(max(log10(avgResidual))))]);

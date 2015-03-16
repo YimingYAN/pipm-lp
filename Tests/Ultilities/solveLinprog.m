@@ -3,22 +3,25 @@ function [actualActv, exitflag, x] = solveLinprog(A,b,c, alg)
 %   alg: 
 %       splx     -  simplex solver
 %       ipm      -  interior-point solver
-%       actv-set -  active-set solver
 n  = size(A, 2);   A  = full(A);
 lb = zeros(n, 1);  ub = inf*ones(n, 1);
 
 switch lower(alg)
     case 'splx'
-        options = optimset('LargeScale', 'off', 'Algorithm','simplex','Display','off');
+        options = optimoptions('linprog',...
+            'Algorithm','dual-simplex',...
+            'TolFun', 1e-09,...
+            'Display','off');
     case 'ipm'
-        options = optimset('Algorithm', 'interior-point','Display','off');
-    case 'actv-set'
-        options = optimset('Algorithm','active-set','Display','off');
+        options = optimoptions('linprog',...
+            'Algorithm','interior-point',...
+            'TolFun', 1e-09,...
+            'Display','off');
     otherwise
         error('solveLinprog: no such a solver');
 end
 
-[xsol,~,exitflag] = linprog(c,[],[],A,b,lb,ub,[],options);
+[xsol,~,exitflag, output] = linprog(c,[],[],A,b,lb,ub,[],options);
 
 % Get actual actv
 actualActv = find(xsol<1e-05);
