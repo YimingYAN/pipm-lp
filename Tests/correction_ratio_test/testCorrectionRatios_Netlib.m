@@ -83,7 +83,7 @@ res_unp = fpr_per_splx;
 
 fprintf('Progress: \n');
 while i <= numTestProb
-    fprintf('| --> %2d',i);
+    fprintf('| Prob (%2d)',i);
     
     load(prob2test{i});
     [A,b,c,~]=myPreprocess(A,b,c,lbounds,ubounds,BIG);
@@ -105,12 +105,15 @@ while i <= numTestProb
     
     % Determine range
     ref = pipm(A,b,c,parameters_ref); ref.solve;
-    stopAtRangeU = ref.getIPMIterCount;
+    stopAtRangeU = ref.getIPMIterCount; 
     stopAtRangeL = stopAtRangeU - steps + 1;
+    if(stopAtRangeL < 0)
+        error('stopAtRangeL<0; adjust your steps');
+    end
+    fprintf(' <>- (M = %2d) -<>', stopAtRangeU);
     
     counter = 1;      % Counter for outter loop
     skipped = 0;
-    
     for k = stopAtRangeL:1:stopAtRangeU
         
         %% Predict the actv - Per

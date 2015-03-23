@@ -18,6 +18,12 @@ titles = {'False Prediction Ratio',...
     'Correction Ratio',...
     'Average Relative Residual (log10)'};
 
+set(0,'DefaultAxesFontName','Arial');
+set(0,'DefaultTextFontName','Arial');
+set(0,'DefaultAxesFontSize',9);
+set(0,'DefaultTextFontSize',9);
+set(0,'defaulttextinterpreter','tex');
+
 h = zeros(4,1);
 for i = 1: 4
     h(i) = subplot(2,2,i);
@@ -38,7 +44,7 @@ for i = 1: 4
             %'MarkerFaceColor', colors{j})
     end
     hold off
-    title(titles{i});
+    title(titles{i}, 'FontName', 'Arial', 'FontWeight', 'Normal');
 end
 
 % Set axes properties
