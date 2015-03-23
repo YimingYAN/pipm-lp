@@ -46,7 +46,7 @@ set(h,'XTick',range);
 if isNetlib
     for i = 1:length(range)
         if i ~= 1
-            tickLabel{length(range) - i + 1} = ['M-' num2str(range(i)) - 1];
+            tickLabel{length(range) - i + 1} = ['M-' num2str(range(i) - 1)];
         else
             tickLabel{length(range) - i + 1} = ['M'];
         end

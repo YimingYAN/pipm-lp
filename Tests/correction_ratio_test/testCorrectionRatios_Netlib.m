@@ -16,7 +16,7 @@ warning off
 % nameOfProbSet = 'netlib_IF_ID_CF.txt';
 nameOfProbSet = 'netlib_test_probs.txt';
 
-steps = 6;
+steps = 10;
 
 actvPredStrtgy = 'conservCutoff';
 
